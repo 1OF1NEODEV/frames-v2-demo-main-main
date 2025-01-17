@@ -153,7 +153,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               />
             </div>
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              Don Da Degen Dog is a daring and spirited meme coin that merges art, humor, and the relentless enegry of a true degen. With it's charasmatic canine mascot, Don Da Degen Dog is here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.<br/>
+              Don Da Degen Dog is a daring and spirited meme coin that merges art, humor, and the relentless enegry of a true degen. With its charasmatic canine mascot, Don Da Degen Dog is here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.<br/>
             </p>
           </div>
         </Card>
@@ -165,10 +165,13 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
           <div className="p-8">
             <div className="flex justify-center mb-6">
-              <img 
+              <Image 
                 src="/loading-clanker.gif"
                 alt="Clanker bot animation"
+                width={128}
+                height={128}
                 className="w-32 h-32"
+                unoptimized
               />
             </div> 
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
