@@ -90,7 +90,7 @@ export default function Demo(
       setContext(context);
       setAdded(context.client.added);
 
-      sdk.on("frameAdded", ({ notificationDetails }) => {
+      sdk.on("frameAdded", ({ notificationDetails }: { notificationDetails?: FrameNotificationDetails }) => {
         setLastEvent(
           `frameAdded${!!notificationDetails ? ", notifications enabled" : ""}`
         );
@@ -101,7 +101,7 @@ export default function Demo(
         }
       });
 
-      sdk.on("frameAddRejected", ({ reason }) => {
+      sdk.on("frameAddRejected", ({ reason }: { reason: string }) => {
         setLastEvent(`frameAddRejected, reason ${reason}`);
       });
 
@@ -111,7 +111,7 @@ export default function Demo(
         setNotificationDetails(null);
       });
 
-      sdk.on("notificationsEnabled", ({ notificationDetails }) => {
+      sdk.on("notificationsEnabled", ({ notificationDetails }: { notificationDetails: FrameNotificationDetails }) => {
         setLastEvent("notificationsEnabled");
         setNotificationDetails(notificationDetails);
       });
