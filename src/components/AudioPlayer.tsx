@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 interface AudioPlayerProps {
   audioSrc: string;
@@ -32,23 +33,20 @@ export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed top-4 left-4 z-50">
       <audio ref={audioRef} src={audioSrc} />
       <button
         onClick={togglePlay}
-        className="bg-black/80 hover:bg-black text-white p-3 rounded-full shadow-lg transition-all"
+        className={`p-2 transition-transform hover:scale-110 ${isPlaying ? 'animate-pulse' : ''}`}
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
       >
-        {isPlaying ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="6" y="4" width="4" height="16"></rect>
-            <rect x="14" y="4" width="4" height="16"></rect>
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-        )}
+        <Image
+          src={isPlaying ? "/icons8-speaker-32.png" : "/icons8-mute-32.png"}
+          alt={isPlaying ? "Pause" : "Play"}
+          width={32}
+          height={32}
+          className="transition-opacity hover:opacity-100 opacity-70"
+        />
       </button>
     </div>
   );
