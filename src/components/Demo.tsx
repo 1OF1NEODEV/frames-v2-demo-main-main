@@ -93,7 +93,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               <path fill="#e6e5e5" fillRule="evenodd" d="M21,18.999v-6.001	h-2.001v6.001H21z" clipRule="evenodd"></path>
               <path fill="#e6e5e5" fillRule="evenodd" d="M13,18.997v-6.001	h-2.001v6.001H13z" clipRule="evenodd"></path>
             </svg>
-          </span>
+            </span>
         </Link>
       </div>
    
@@ -134,6 +134,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
    <Button 
           className="bg-[#8660CC] hover:bg-[#7450b3] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
           style={{ ...customStyles.pressStart, fontSize: '14px' }}
+          onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
         >
           Buy $DON
         </Button>
@@ -173,7 +174,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                 className="w-32 h-32"
                 unoptimized
               />
-            </div> 
+        </div>
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
               The circulating supply is 100,000,000,000 $DON.<br/>
               $DON was fairly launched by clanker, an autonomous bot on farcaster that enables users to launch memecoins with a simple cast mentioning the bot. It starts with only the token supply (no eth), as clanker uses one-sided liquidity on uniswap v3.
@@ -189,7 +190,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             {/* Uniswap Widget */}
             <div className="Uniswap flex justify-center items-center">
           
-      
+
             </div>
           </div>
         </Card>
@@ -216,18 +217,19 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         </div>
          {/* Buttons Container */}
          <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
-          <Button 
+            <Button
             className="bg-[#2A69F7] hover:bg-[#2255d1] text-white font-bold py-2 px-4 rounded-lg border-4 border-black flex-1 hover:animate-[wiggle_1.5s_ease-in-out]"
             style={{ ...customStyles.pressStart, fontSize: '14px' }}
           >
             ???
-          </Button>
-          <Button 
+            </Button>
+                <Button
             className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg border-4 border-black flex-1 hover:animate-[wiggle_1.5s_ease-in-out]"
             style={{ ...customStyles.pressStart, fontSize: '14px' }}
+            onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
           >
             Buy $DON
-          </Button>
+                </Button>
         </div>
       </div>
 
