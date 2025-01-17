@@ -10,8 +10,15 @@ declare module "next-auth" {
   }
 }
 
+if (!process.env.NEXTAUTH_SECRET) {
+  throw new Error('Please provide NEXTAUTH_SECRET environment variable');
+}
+
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt"
+  },
   providers: [
     CredentialsProvider({
       name: "Sign in with Farcaster",
