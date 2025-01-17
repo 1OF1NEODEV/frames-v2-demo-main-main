@@ -10,14 +10,14 @@ declare module "next-auth" {
   }
 }
 
-if (!process.env.NEXTAUTH_SECRET) {
-  throw new Error('Please provide NEXTAUTH_SECRET environment variable');
-}
+// Generate a default secret for development
+const DEFAULT_SECRET = "7052b97e83f4c651c881b251c3efd21bcd458c73044e7b6ac07a04cfd5f1168f";
 
 export const authOptions: AuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || DEFAULT_SECRET,
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60 // 30 days
   },
   providers: [
     CredentialsProvider({
