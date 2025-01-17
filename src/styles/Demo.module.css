@@ -1,0 +1,16 @@
+.bebasNeueRegular {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  background-image: url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png");
+  margin: 0 auto;
+  background-color: #2A69F7;
+  background-size: 109% auto;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+} 
