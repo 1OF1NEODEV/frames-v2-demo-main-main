@@ -181,6 +181,67 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             </p>
           </div>
         </Card>
+
+        {/* How to Buy Card */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>How to Buy</h2>
+          </div>
+          <div className="p-8 space-y-6">
+            {/* Step 1 */}
+            <div className="flex gap-4 items-start">
+              <div className="bg-[#F69137] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                01
+              </div>
+              <div>
+                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Get a Wallet</h3>
+                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                  Download a crypto wallet like MetaMask, Phantom or Raindow.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="flex gap-4 items-start">
+              <div className="bg-[#2A69F7] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                02
+              </div>
+              <div>
+                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Add Base</h3>
+                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                  Purchase Base on an exchange like Binance or Coinbase, then transfer it to your wallet.
+                </p>
+          </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="flex gap-4 items-start">
+              <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                03
+              </div>
+              <div>
+                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Connect to a DEX</h3>
+                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                  Visit a DEX like Clanker.fun, Dexscreener or Gecko Terminal and connect your wallet.
+                </p>
+          </div>
+        </div>
+
+            {/* Step 4 */}
+            <div className="flex gap-4 items-start">
+              <div className="bg-green-400 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                04
+              </div>
+        <div>
+                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Swap for $DON</h3>
+                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                Paste the $DON token address, select DON, and confirm. Sign the wallet prompt in app to complete.
+                </p>
+            </div>
+            </div>
+          </div>
+        </Card>
+
         {/* Third Card - Features */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="swap-section">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
@@ -191,8 +252,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             <div className="Uniswap flex justify-center items-center">
           
 
-            </div>
-          </div>
+                    </div>
+                  </div>
         </Card>
         {/* Gallery Section */}
         <div className="max-w-md mx-auto mt-8 grid grid-cols-2 grid-rows-3 gap-4">
@@ -214,15 +275,15 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               />
             </div>
           ))}
-        </div>
+              </div>
          {/* Buttons Container */}
          <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
-            <Button
+                <Button
             className="bg-[#2A69F7] hover:bg-[#2255d1] text-white font-bold py-2 px-4 rounded-lg border-4 border-black flex-1 hover:animate-[wiggle_1.5s_ease-in-out]"
             style={{ ...customStyles.pressStart, fontSize: '14px' }}
-          >
+                >
             ???
-            </Button>
+                </Button>
                 <Button
             className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg border-4 border-black flex-1 hover:animate-[wiggle_1.5s_ease-in-out]"
             style={{ ...customStyles.pressStart, fontSize: '14px' }}

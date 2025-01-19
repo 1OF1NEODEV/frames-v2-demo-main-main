@@ -43,8 +43,8 @@ export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
         <Image
           src={isPlaying ? "/icons8-speaker-32.png" : "/icons8-mute-32.png"}
           alt={isPlaying ? "Pause" : "Play"}
-          width={32}
-          height={32}
+          width={24}
+          height={24}
           className="transition-opacity hover:opacity-100 opacity-70"
         />
       </button>
