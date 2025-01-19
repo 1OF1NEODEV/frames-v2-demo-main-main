@@ -31,10 +31,13 @@ const customStyles = {
     backgroundImage: 'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png")',
     margin: '0 auto',
     backgroundColor: '#2A69F7',
-    backgroundSize: '109% auto',
-    backgroundPosition: 'top',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center top',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
+    width: '100%',
+    maxWidth: '100vw',
+    overflow: 'hidden'
   }
 };
 
