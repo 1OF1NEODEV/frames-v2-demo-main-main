@@ -34,10 +34,11 @@ const customStyles = {
     backgroundColor: '#2A69F7',
     backgroundSize: 'auto 100vh',
     backgroundPosition: 'top center',
-    backgroundRepeat: 'repeat',
+    backgroundAttachment: 'fixed',
+
     width: '100%',
     maxWidth: '100vw',
-    overflow: 'auto'
+
   }
 };
 
