@@ -34,7 +34,7 @@ const customStyles = {
     backgroundColor: '#2A69F7',
     backgroundSize: 'auto 100vh',
     backgroundPosition: 'top center',
-    backgroundRepeat: 'repeat-x',
+    backgroundRepeat: 'repeat',
     width: '100%',
     maxWidth: '100vw',
     overflow: 'auto'
@@ -105,7 +105,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   ];
 
   return (
-    <main className="flex flex-col" style={customStyles.container}>
+    <main className="flex flex-col bg-scroll" style={customStyles.container}>
       {/* Social Icons */}
       <div className="flex justify-end gap-3 mb-6 px-2">
         <Link href="https://x.com/dononbase" className="hover:opacity-80">
