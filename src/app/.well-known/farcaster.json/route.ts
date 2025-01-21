@@ -4,20 +4,20 @@ export async function GET() {
   const config = {
     accountAssociation: {
       header:
-        "eyJmaWQiOjM2MjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgyY2Q4NWEwOTMyNjFmNTkyNzA4MDRBNkVBNjk3Q2VBNENlQkVjYWZFIn0",
+        "eyJmaWQiOjIzNTAyNSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweEQwODA0NTdiRjIwMUJiQjcxNDUwNTU4OEQ4ODI1ZTJDZjRhYjgwNDAifQ",
       payload: "eyJkb21haW4iOiJmcmFtZXMtdjIudmVyY2VsLmFwcCJ9",
       signature:
-        "MHhiNDIwMzQ1MGZkNzgzYTExZjRiOTllZTFlYjA3NmMwOTdjM2JkOTY1NGM2ODZjYjkyZTAyMzk2Y2Q0YjU2MWY1MjY5NjI5ZGQ5NTliYjU0YzEwOGI4OGVmNjdjMTVlZTdjZDc2YTRiMGU5NzkzNzA3YzkxYzFkOWFjNTg0YmQzNjFi",
+        "MHhjZjYyYjczYTFlZjA4NTBmNDU0MTk3ODAzMTliMzFkZjViYWY4YzY1MjkzYTcxNzA1NmNiYzY2NWRhMTlhN2EyNDYxZjY0ODExMDBkNWNmZDMzNTUxYzkzZTEyZDFmMWE1NGMyMDYyNGNlODE0NDgzMTgzNjRlY2Y3Y2EzMGQ1ZDFj",
     },
     frame: {
       version: "1",
-      name: "Frames v2 Demo",
+      name: "Don Da Degen Dog",
       iconUrl: `${appUrl}/icon.png`,
-      homeUrl: appUrl,
-      imageUrl: `${appUrl}/frames/hello/opengraph-image`,
-      buttonTitle: "Launch Frame",
-      splashImageUrl: `${appUrl}/splash.png`,
-      splashBackgroundColor: "#f7f7f7",
+      homeUrl: "https://frames-v2-demo-main-main.vercel.app",
+      imageUrl: `${appUrl}/frame-cast.png`,
+      buttonTitle: "Launch App",
+      splashImageUrl: `${appUrl}/icon.png`,
+      splashBackgroundColor: "#ffffff",
       webhookUrl: `${appUrl}/api/webhook`,
     },
   };

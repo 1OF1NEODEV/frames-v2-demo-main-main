@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { Check, Copy } from "lucide-react";
-
+import sdk, { type FrameContext } from '@farcaster/frame-sdk';
 import { Button } from "~/components/ui/Button";
 import { Card } from "~/components/ui/card";
 import { truncateAddress } from "~/lib/truncateAddress";
@@ -43,6 +43,17 @@ const customStyles = {
 };
 
 export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): JSX.Element {
+  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+
+  useEffect(() => {
+    const load = async () => {
+      sdk.actions.ready();
+    };
+    if (sdk && !isSDKLoaded) {
+      setIsSDKLoaded(true);
+      load();
+    }
+  }, [isSDKLoaded]);
   const [isCopied, setIsCopied] = useState(false);
   const [selectedImage, setSelectedImage] = useState<null | {
     src: string;
