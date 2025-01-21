@@ -1,5 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+@font-face {
+  font-family: 'Upheaval Pro';
+  src: url('/UpheavalPro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Retro Computer';
+  src: url('/retro_computer_personal_use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
@@ -30,7 +43,7 @@
   }
 
   html {
-    font-family: 'Press Start 2P', system-ui, sans-serif;
+    font-family: 'Upheaval Pro', system-ui, sans-serif;
   }
 }
 

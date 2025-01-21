@@ -147,7 +147,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Origin</h2>
           </div>
           <div className="p-8 flex flex-col items-center space-y-6">
-            <div className="flex justify-center items-center">
+            {/* Origin Image */}
+            <div className="flex justify-center mb-6">
               <Image
                 src="/DON FULL BODY v2.gif"
                 alt="DON character with purple top hat and headphones"
@@ -168,16 +169,17 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Tokenomics</h2>
           </div>
           <div className="p-8">
-            <div className="flex justify-center mb-6">
+            {/* Tokenomics Image */}
+            <div className="flex justify-center mb-2">
               <Image 
                 src="/loading-clanker.gif"
-                alt="Clanker bot animation"
+                alt="Tokenomics animation"
                 width={128}
                 height={128}
                 className="w-32 h-32"
                 unoptimized
               />
-        </div>
+            </div>
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
               The circulating supply is 100,000,000,000 $DON.<br/>
               $DON was fairly launched by clanker, an autonomous bot on farcaster that enables users to launch memecoins with a simple cast mentioning the bot. It starts with only the token supply (no eth), as clanker uses one-sided liquidity on uniswap v3.
@@ -191,17 +193,29 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>How to Buy</h2>
           </div>
           <div className="p-8 space-y-6">
+            {/* Wallet Image */}
+            <div className="flex justify-center mb-4">
+              <Image 
+                src="/DON'S WALLET.png"
+                alt="Wallet illustration"
+                width={128}
+                height={128}
+                className="w-32 h-32"
+                unoptimized
+              />
+            </div>
+
             {/* Step 1 */}
             <div className="flex gap-4 items-start">
               <div className="bg-[#F69137] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 01
-              </div>
-              <div>
+        </div>
+        <div>
                 <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Get a Wallet</h3>
                 <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                   Download a crypto wallet like MetaMask, Phantom or Raindow.
                 </p>
-              </div>
+          </div>
             </div>
 
             {/* Step 2 */}
@@ -236,9 +250,9 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                 04
               </div>
         <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Swap for $DON</h3>
+                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Swap for DON</h3>
                 <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Paste the $DON token address, select DON, and confirm. Sign the wallet prompt in app to complete.
+                Paste the $DON token address, select DON, and confirm. Sign the wallet prompt to complete.
                 </p>
             </div>
             </div>
@@ -248,37 +262,31 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         {/* Third Card - Features */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="swap-section">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Swap Token</h2>
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Gallery</h2>
           </div>
           <div className="p-8">
-            {/* Uniswap Widget */}
-            <div className="Uniswap flex justify-center items-center">
-          
+            {/* Gallery Section */}
+            <div className="flex flex-col gap-4">
+              {[
+                "/DON TRUMP.png",
+                "/THE_HILL.png",
+                "/DON_KING.png",
+                "/SKIMASK_DON.gif",
 
+              ].map((src, index) => (
+                <div key={index} className="w-full aspect-square relative rounded-xl overflow-hidden bg-gray-100 shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+                  <Image
+                    src={src}
+                    alt={`DON artwork ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    unoptimized={src.endsWith('.gif')}
+                  />
+              </div>
+              ))}
                     </div>
                   </div>
         </Card>
-        {/* Gallery Section */}
-        <div className="max-w-md mx-auto mt-8 grid grid-cols-2 grid-rows-3 gap-4">
-          {[
-            "/DONYA.gif",
-            "/THE_HILL.png",
-            "/DON_KING.png",
-            "/SKIMASK_DON.gif",
-            "/RODEO_DON.gif",
-            "/DON SPACE SUIT MOON.png"
-          ].map((src, index) => (
-            <div key={index} className="aspect-square relative rounded-xl overflow-hidden bg-gray-100 border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-              <Image
-                src={src}
-                alt={`DON artwork ${index + 1}`}
-                fill
-                className="object-cover"
-                unoptimized={src.endsWith('.gif')}
-              />
-            </div>
-          ))}
-              </div>
          {/* Buttons Container */}
          <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
                 <Button

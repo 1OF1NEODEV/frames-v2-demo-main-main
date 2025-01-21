@@ -80,9 +80,13 @@ module.exports = {
   			wiggle: 'wiggle 1s ease-in-out infinite'
   		},
   		fontFamily: {
-  			'press-start': [
-  				'"Press Start 2P"',
-  				'cursive'
+  			'upheaval': [
+  				'Upheaval Pro',
+  				'sans-serif'
+  			],
+  			'retro': [
+  				'Retro Computer',
+  				'monospace'
   			]
   		}
   	}
