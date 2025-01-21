@@ -190,9 +190,9 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Origin</h2>
           </div>
-          <div className="p-8 flex flex-col items-center space-y-6">
+          <div className="p-8 flex flex-col items-center space-y-3">
             {/* Origin Image */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-2">
               <Image
                 src="/DON FULL BODY v2.gif"
                 alt="DON character with purple top hat and headphones"
@@ -283,7 +283,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               <div>
                 <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Connect to a DEX</h3>
                 <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Visit a DEX like Clanker.fun, Dexscreener or Gecko Terminal and connect your wallet.
+                  Visit a DEX like Clanker.World, Dexscreener, Gecko Terminal or Matcha and connect your wallet.
                 </p>
           </div>
         </div>
@@ -305,14 +305,14 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
         {/* Buttons Container */}
         <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
-          <Button
+            <Button
             className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
             style={{ ...customStyles.pressStart, fontSize: '14px' }}
             onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
           >
             Buy $DON
-          </Button>
-        </div>
+            </Button>
+          </div>
 
         {/* Third Card - Gallery */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="swap-section">
@@ -335,17 +335,17 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                     className="object-cover"
                     unoptimized={image.src.endsWith('.gif')}
                   />
-                </div>
+                    </div>
               ))}
-            </div>
-          </div>
+        </div>
+      </div>
         </Card>
 
         {/* Disclaimer Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Disclaimer</h2>
-          </div>
+    </div>
           <div className="pt-1 px-8 pb-8">
             {/* Disclaimer Image */}
             <div className="flex justify-center mb-2">
@@ -357,16 +357,33 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                 className="w-32 h-32"
                 unoptimized
               />
-            </div>
+        </div>
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              $DON is an art memecoin with no intrinsic value or expectation of financial return. There is no formal team or roadmap. The coin is for entertainment purposes only.
+              $DON is a art memecoin with no intrinsic value or expectation of financial return. There is no formal team or roadmap. The coin is for entertainment purposes only.
             </p>
           </div>
         </Card>
-      </div>
+
+        {/* Bottom Buy $DON Button */}
+        <div className="flex flex-col gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
+          <Button
+            className="bg-[#8660CC] hover:bg-[#8660CC] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
+            style={{ ...customStyles.pressStart, fontSize: '14px' }}
+            onClick={() => window.open('https://warpcast.com/~/channel/don', '_blank')}
+          >
+            Join Community
+          </Button>
+          <Button
+            className="bg-[#FF990A] hover:bg-[#FF990A] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
+            style={{ ...customStyles.pressStart, fontSize: '14px' }}
+          >
+            ???
+          </Button>
+        </div>
+        </div>
 
       {/* Footer */}
-      <p className="text-center text-white text-sm mt-6" style={customStyles.bebasNeueRegular}>Version 1.0.0</p>
+      <p className="text-center text-white text-sm mt-6" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
       
       <AudioPlayer audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" />
 
