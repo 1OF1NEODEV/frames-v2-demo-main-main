@@ -32,13 +32,12 @@ const customStyles = {
     backgroundImage: 'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png")',
     margin: '0 auto',
     backgroundColor: '#2A69F7',
-    backgroundSize: '100% auto',
-    backgroundPosition: 'center top',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
+    backgroundSize: '100%',
+    backgroundPosition: 'top center',
+    backgroundRepeat: 'repeat-y',
     width: '100%',
     maxWidth: '100vw',
-    overflow: 'hidden'
+    overflow: 'auto'
   }
 };
 
@@ -106,7 +105,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   ];
 
   return (
-    <main style={customStyles.container}>
+    <main className="flex flex-col" style={customStyles.container}>
       {/* Social Icons */}
       <div className="flex justify-end gap-3 mb-6 px-2">
         <Link href="https://x.com/dononbase" className="hover:opacity-80">
