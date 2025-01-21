@@ -15,7 +15,7 @@ export async function GET() {
       iconUrl: `${appUrl}/icon.png`,
       homeUrl: "https://frames-v2-demo-main-main.vercel.app",
       imageUrl: `${appUrl}/frame-cast.png`,
-      buttonTitle: "Launch App",
+      buttonTitle: "Launch Frame",
       splashImageUrl: `${appUrl}/icon.png`,
       splashBackgroundColor: "#ffffff",
       webhookUrl: `${appUrl}/api/webhook`,

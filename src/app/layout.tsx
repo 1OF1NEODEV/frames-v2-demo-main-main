@@ -6,7 +6,7 @@ import { Providers } from "~/app/providers";
 
 export const metadata: Metadata = {
   title: "Don Da Degen Dog",
-  description: "Let Me See That $DON!",
+  description: "Coolest Degenerate Pixel Dog on Base.",
 };
 
 export default async function RootLayout({

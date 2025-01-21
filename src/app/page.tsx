@@ -7,7 +7,7 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/frame-cast.png`,
   button: {
-    title: "Launch App",
+    title: "Launch Frame",
     action: {
       type: "launch_frame",
       name: "Don Da Degen Dog",
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Don Da Degen Dog",
     openGraph: {
       title: "Don Da Degen Dog",
-      description: "Let Me See That $DON!",
+      description: "Coolest Degenerate Pixel Dog on Base.",
     },
     other: {
       "fc:frame": JSON.stringify(frame),
