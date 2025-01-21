@@ -10,6 +10,7 @@ import { Button } from "~/components/ui/Button";
 import { Card } from "~/components/ui/card";
 import { truncateAddress } from "~/lib/truncateAddress";
 import AudioPlayer from "~/components/AudioPlayer";
+import Lightbox from "~/components/Lightbox";
 
 // Constants
 const contractAddress = "0x2427e231B401E012edacD1c4dD700ea2D4376eD0";
@@ -43,12 +44,55 @@ const customStyles = {
 
 export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): JSX.Element {
   const [isCopied, setIsCopied] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<null | {
+    src: string;
+    title: string;
+    artist: string;
+    description: string;
+    minted: string;
+    collection: string;
+  }>(null);
   
   const copyToClipboard = useCallback(() => {
     navigator.clipboard.writeText(contractAddress);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   }, []);
+
+  const galleryImages = [
+    {
+      src: "/DON TRUMP.png",
+      title: "DON TRUMP",
+      artist: "1OF1NEO",
+      description: "68 × 70 px",
+      minted: "January 20, 2024",
+      collection: "Don's Doodles"
+    },
+    {
+      src: "/THE_HILL.png",
+      title: "TOUCHING GRASS",
+      artist: "1OF1NEO",
+      description: "108 × 108 px",
+      minted: "January 15, 2024",
+      collection: "Don's Doodles"
+    },
+    {
+      src: "/DON_KING.png",
+      title: "KING DON",
+      artist: "1OF1NEO",
+      description: "68 × 68 px",
+      minted: "January 14, 2024",
+      collection: "Don's Doodles"
+    },
+    {
+      src: "/SKIMASK_DON.gif",
+      title: "SKI MASK DON",
+      artist: "1OF1NEO",
+      description: "40 × 48 px",
+      minted: "December 13, 2024",
+      collection: "Don's Doodles"
+    }
+  ];
 
   return (
     <main style={customStyles.container}>
@@ -207,7 +251,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
             {/* Step 1 */}
             <div className="flex gap-4 items-start">
-              <div className="bg-[#F69137] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+              <div className="bg-[#FFC107] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 01
         </div>
         <div>
@@ -233,7 +277,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
             {/* Step 3 */}
             <div className="flex gap-4 items-start">
-              <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+              <div className="bg-[#FF3737] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 03
               </div>
               <div>
@@ -246,7 +290,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
             {/* Step 4 */}
             <div className="flex gap-4 items-start">
-              <div className="bg-green-400 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+              <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 04
               </div>
         <div>
@@ -259,7 +303,18 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
         </Card>
 
-        {/* Third Card - Features */}
+        {/* Buttons Container */}
+        <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
+          <Button
+            className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
+            style={{ ...customStyles.pressStart, fontSize: '14px' }}
+            onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
+          >
+            Buy $DON
+          </Button>
+        </div>
+
+        {/* Third Card - Gallery */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="swap-section">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Gallery</h2>
@@ -267,48 +322,60 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           <div className="p-8">
             {/* Gallery Section */}
             <div className="flex flex-col gap-4">
-              {[
-                "/DON TRUMP.png",
-                "/THE_HILL.png",
-                "/DON_KING.png",
-                "/SKIMASK_DON.gif",
-
-              ].map((src, index) => (
-                <div key={index} className="w-full aspect-square relative rounded-xl overflow-hidden bg-gray-100 shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+              {galleryImages.map((image, index) => (
+                <div 
+                  key={index} 
+                  className="w-full aspect-square relative rounded-xl overflow-hidden bg-gray-100 shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)] cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => setSelectedImage(image)}
+                >
                   <Image
-                    src={src}
-                    alt={`DON artwork ${index + 1}`}
+                    src={image.src}
+                    alt={image.title}
                     fill
                     className="object-cover"
-                    unoptimized={src.endsWith('.gif')}
+                    unoptimized={image.src.endsWith('.gif')}
                   />
-              </div>
+                </div>
               ))}
-                    </div>
-                  </div>
+            </div>
+          </div>
         </Card>
-         {/* Buttons Container */}
-         <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
-                <Button
-            className="bg-[#2A69F7] hover:bg-[#2255d1] text-white font-bold py-2 px-4 rounded-lg border-4 border-black flex-1 hover:animate-[wiggle_1.5s_ease-in-out]"
-            style={{ ...customStyles.pressStart, fontSize: '14px' }}
-                >
-            ???
-                </Button>
-                <Button
-            className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg border-4 border-black flex-1 hover:animate-[wiggle_1.5s_ease-in-out]"
-            style={{ ...customStyles.pressStart, fontSize: '14px' }}
-            onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
-          >
-            Buy $DON
-                </Button>
-        </div>
+
+        {/* Disclaimer Card */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Disclaimer</h2>
+          </div>
+          <div className="pt-1 px-8 pb-8">
+            {/* Disclaimer Image */}
+            <div className="flex justify-center mb-2">
+              <Image 
+                src="/disclaimer.png"
+                alt="Disclaimer illustration"
+                width={128}
+                height={128}
+                className="w-32 h-32"
+                unoptimized
+              />
+            </div>
+            <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              $DON is an art memecoin with no intrinsic value or expectation of financial return. There is no formal team or roadmap. The coin is for entertainment purposes only.
+            </p>
+          </div>
+        </Card>
       </div>
 
       {/* Footer */}
-      <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>Version 1.0.0</p>
-
+      <p className="text-center text-white text-sm mt-6" style={customStyles.bebasNeueRegular}>Version 1.0.0</p>
+      
       <AudioPlayer audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" />
+
+      {/* Lightbox */}
+      <Lightbox
+        isOpen={selectedImage !== null}
+        onClose={() => setSelectedImage(null)}
+        image={selectedImage || galleryImages[0]}
+      />
     </main>
   );
 }
