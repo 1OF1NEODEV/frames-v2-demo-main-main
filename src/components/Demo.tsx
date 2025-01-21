@@ -11,6 +11,7 @@ import { Card } from "~/components/ui/card";
 import { truncateAddress } from "~/lib/truncateAddress";
 import AudioPlayer from "~/components/AudioPlayer";
 import Lightbox from "~/components/Lightbox";
+import styles from '~/styles/Demo.module.css';
 
 // Constants
 const contractAddress = "0x2427e231B401E012edacD1c4dD700ea2D4376eD0";
@@ -106,7 +107,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   ];
 
   return (
-    <main className="flex flex-col bg-scroll" style={customStyles.container}>
+    <main className={`flex flex-col ${styles.container}`}>
       {/* Social Icons */}
       <div className="flex justify-end gap-3 mb-6 px-2">
         <Link href="https://x.com/dononbase" className="hover:opacity-80">
