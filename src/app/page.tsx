@@ -12,7 +12,7 @@ const frame = {
       type: "launch_frame",
       name: "Don Da Degen Dog",
       url: appUrl,
-      splashImageUrl: `${appUrl}/splash.png`,
+      splashImageUrl: `${appUrl}/icon.png`,
       splashBackgroundColor: "#ffffff",
     },
   },
