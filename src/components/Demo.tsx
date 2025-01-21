@@ -32,7 +32,7 @@ const customStyles = {
     backgroundImage: 'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png")',
     margin: '0 auto',
     backgroundColor: '#2A69F7',
-    backgroundSize: 'cover',
+    backgroundSize: '100% auto',
     backgroundPosition: 'center top',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
