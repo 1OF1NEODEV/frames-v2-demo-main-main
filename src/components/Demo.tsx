@@ -210,7 +210,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         {/* Second Card - Tokenomics */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Tokenomics</h2>
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Donomics</h2>
           </div>
           <div className="p-8">
             {/* Tokenomics Image */}
