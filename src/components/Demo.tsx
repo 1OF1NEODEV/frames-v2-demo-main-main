@@ -77,7 +77,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       title: "DON TRUMP",
       artist: "1OF1NEO",
       description: "68 × 70 px",
-      minted: "January 20, 2024",
+      minted: "January 24, 2024",
       collection: "Don's Doodles"
     },
     {
@@ -97,6 +97,22 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       collection: "Don's Doodles"
     },
     {
+      src: "/RODEO_DON.gif",
+      title: "RODEO DON",
+      artist: "1OF1NEO",
+      description: "84 × 62 px",
+      minted: "January 12, 2024",
+      collection: "Don's Doodles"
+    },
+    {
+      src: "/DICKBUTT_DON.png",
+      title: "DICKBUTT DON",
+      artist: "1OF1NEO",
+      description: "48 × 58 px",
+      minted: "January 10, 2024",
+      collection: "Don's Doodles"
+    },
+    {
       src: "/SKIMASK_DON.gif",
       title: "SKI MASK DON",
       artist: "1OF1NEO",
@@ -108,55 +124,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
   return (
     <main className={`flex flex-col ${styles.container}`}>
-      {/* Social Icons */}
-      <div className="flex justify-end gap-3 mb-6 px-2">
-        <Link href="https://x.com/dononbase" className="hover:opacity-80">
-          <span className="block w-6.5 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 32 32">
-              <polygon fill="#589bd4" points="30,7 30,9 28,9 28,15 26,15 26,19 24,19 24,24 22,24 22,26 18,26 18,28 10,28 10,26 5,26 5,24 10,24 10,22 5,22 5,18 2,18 2,13 0,13 0,9 2,9 2,11 16,11 16,9 18,9 18,7 20,7 20,5 26,5 26,7"></polygon>
-              <rect width="7" height="2" x="2" y="16" fill="#26659f"></rect>
-              <rect width="5" height="2" x="5" y="20" fill="#26659f"></rect>
-            </svg>
-          </span>
-        </Link>
-        <Link href="https://t.me/dononbase" className="hover:opacity-80">
-          <span className="block w-6 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
-              <polygon fill="#589bd4" points="28,10 28,22 26,22 26,24 24,24 24,26 22,26 22,28 10,28 10,26 8,26 8,24 6,24 6,22 4,22 4,10 6,10 6,8 8,8 8,6 10,6 10,4 22,4 22,6 24,6 24,8 26,8 26,10"></polygon>
-              <polygon fill="#e6e5e5" points="21,9 21,23 19,23 19,21 15,21 15,19 13,19 13,21 11,21 11,17 8,17 8,15 11,15 11,13 13,13 13,11 17,11 17,9"></polygon>
-              <polygon fill="#b6b5b5" points="13,15 13,17 11,17 11,21 13,21 13,19 15,19 15,15"></polygon>
-              <rect width="2" height="2" x="15" y="13" fill="#b6b5b5"></rect>
-            </svg>
-          </span>
-        </Link>
-        <Link href="https://www.instagram.com/dononbase/" className="hover:opacity-80">
-          <span className="block w-6 h-6">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
-              <path fill="#f18f06" fillRule="evenodd" d="M8.997,28.997h-2v-2h-2	v-2l-1-1v-9h24v9l-1,1v2h-2v2h-2h-4l-1-1h-8L8.997,28.997z" clipRule="evenodd"></path>
-              <path fill="#f18f06" fillRule="evenodd" d="M3.997,19.997v-7h22v9	l1,1v4h-2v2h-2v-2l-1-1l2-2l-1-1h-2v-2h-2l-1-1h-4l-2-2l-1,1h-2v2h-2l-2,2v2h-2v-4L3.997,19.997z" clipRule="evenodd"></path>
-              <path fill="#e41e2f" fillRule="evenodd" d="M2.997,14.997v6h2l2-4h2	v-2h10l2,4h2v2h2l2,2v2h2v-6l-1-1v-9h-24v5L2.997,14.997z" clipRule="evenodd"></path>
-              <path fill="#e41e2f" fillRule="evenodd" d="M2.997,12.997v2h2l2-2h2	v-2h4l6,2l1,1l1-1h2v2h3l1,4h2v-2l-3-9h-22L2.997,12.997z" clipRule="evenodd"></path>
-              <path fill="#085295" fillRule="evenodd" d="M2.997,12.997v-6h2v-2h2	v-2h18v2h2v2h2v10h-2l-2-4h-2v-2l-1-1l-1,1h-2v-2h-10v2h-2l-2,2H2.997z" clipRule="evenodd"></path>
-              <path fill="#f18f06" fillRule="evenodd" d="M8.997,28.997v-2l2-2v-2	h6v2l2,2v2H8.997z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M8.996,4.999v1.999	h14.001V4.999H8.996z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M8.997,24.999v1.999	h14.001v-1.999H8.997z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M26.997,8.997h-1.999	v14.001h1.999V8.997z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M6.997,8.999H4.999V23	h1.999V8.999z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M8.997,6.996H6.999	v2.001h1.999V6.996z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M24.997,6.997h-1.999	v2.001h1.999V6.997z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M24.997,22.996h-1.999	v2.001h1.999V22.996z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M8.996,22.996H6.997	v2.001h1.999V22.996z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M22.997,8.997h-1.999	v2.001h1.999V8.997z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M19,10.996h-6.001v2.001	H19V10.996z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M18.999,18.996h-6.001	v2.001h6.001V18.996z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M21,18.999v-6.001	h-2.001v6.001H21z" clipRule="evenodd"></path>
-              <path fill="#e6e5e5" fillRule="evenodd" d="M13,18.997v-6.001	h-2.001v6.001H13z" clipRule="evenodd"></path>
-            </svg>
-            </span>
-        </Link>
-      </div>
-   
-
       <div className="max-w-[324px] mx-auto space-y-6 mt-8">
         {/* Hero Title */}
         <div className="text-center mb-6">
@@ -191,7 +158,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         </Card>
    {/* Buy Button */}
    <Button 
-          className="bg-[#8660CC] hover:bg-[#7450b3] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
+          className="bg-[#2A69F7] hover:bg-[#2A69F7] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out] shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]"
           style={{ ...customStyles.pressStart, fontSize: '14px' }}
           onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
         >
@@ -252,7 +219,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             {/* Wallet Image */}
             <div className="flex justify-center mb-4">
               <Image 
-                src="/DON'S WALLET.png"
+                src="/DON'S WALLET V2.png"
                 alt="Wallet illustration"
                 width={128}
                 height={128}
@@ -263,15 +230,15 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
             {/* Step 1 */}
             <div className="flex gap-4 items-start">
-              <div className="bg-[#FFC107] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+              <div className="bg-[#FF990A] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 01
-        </div>
-        <div>
+              </div>
+              <div>
                 <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Get a Wallet</h3>
                 <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                   Download a crypto wallet like MetaMask, Phantom or Raindow.
                 </p>
-          </div>
+              </div>
             </div>
 
             {/* Step 2 */}
@@ -289,28 +256,28 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
             {/* Step 3 */}
             <div className="flex gap-4 items-start">
-              <div className="bg-[#FF3737] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+              <div className="bg-green-400 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 03
               </div>
               <div>
                 <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Connect to a DEX</h3>
                 <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Visit a DEX like Clanker.World, Dexscreener, Gecko Terminal or Matcha and connect your wallet.
+                  Visit a DEX like Clank.Fun, Gecko Terminal or Matcha and connect your wallet.
                 </p>
-          </div>
-        </div>
+              </div>
+            </div>
 
             {/* Step 4 */}
             <div className="flex gap-4 items-start">
               <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 04
               </div>
-        <div>
+              <div>
                 <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Swap for DON</h3>
                 <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Paste the $DON token address, select DON, and confirm. Sign the wallet prompt to complete.
+                  Paste the $DON token address, select DON, and confirm. Sign the wallet prompt to complete swap.
                 </p>
-            </div>
+              </div>
             </div>
           </div>
         </Card>
@@ -318,11 +285,11 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         {/* Buttons Container */}
         <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
             <Button
-            className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
-            style={{ ...customStyles.pressStart, fontSize: '14px' }}
-            onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
-          >
-            Buy $DON
+              className="bg-[#8660CC] hover:bg-[#8660CC] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out] shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]"
+              style={{ ...customStyles.pressStart, fontSize: '14px' }}
+              onClick={() => window.open('https://www.geckoterminal.com/base/pools/0xbb27a2B653533f5CD69Eeab06F22DB7EB3b9A453', '_blank')}
+            >
+              Buy $DON
             </Button>
           </div>
 
@@ -337,27 +304,72 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               {galleryImages.map((image, index) => (
                 <div 
                   key={index} 
-                  className="w-full aspect-square relative rounded-xl overflow-hidden bg-gray-100 shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)] cursor-pointer hover:opacity-90 transition-opacity"
+                  className="w-full aspect-square relative rounded-xl overflow-hidden bg-gray-100 cursor-pointer group [perspective:1000px]"
                   onClick={() => setSelectedImage(image)}
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.title}
-                    fill
-                    className="object-cover"
-                    unoptimized={image.src.endsWith('.gif')}
-                  />
+                  <div className="relative w-full h-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    {/* Front - Image Side */}
+                    <div className="absolute inset-0 [backface-visibility:hidden]">
+                      {/* Base Token Badge */}
+                      <div className="absolute top-3 left-2 z-10">
+                        <Image 
+                          src="/token--base.png"
+                          alt="Base Token"
+                          width={16}
+                          height={16}
+                          className="rounded-full"
+                          unoptimized
+                        />
+                      </div>
+                      <Image
+                        src={image.src}
+                        alt={image.title}
+                        fill
+                        className="object-cover"
+                        unoptimized={image.src.endsWith('.gif')}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent p-4 flex flex-col justify-end">
+                        <h3 className="text-white font-bold mb-0.5" style={{ ...customStyles.pressStart, fontSize: '10px' }}>
+                          {image.title}
+                        </h3>
+                        <p className="text-white/80 text-xs" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                          {image.artist}
+                        </p>
+                      </div>
                     </div>
+
+                    {/* Back - Details Side */}
+                    <div className="absolute inset-0 bg-white p-4 [transform:rotateY(180deg)] [backface-visibility:hidden] border-4 border-black rounded-xl">
+                      <div className="flex flex-col h-full justify-center items-center text-center">
+                        <h3 className="font-bold mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
+                          {image.title}
+                        </h3>
+                        <p className="text-sm mb-1" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                          Artist: {image.artist}
+                        </p>
+                        <p className="text-sm mb-1" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                          Size: {image.description}
+                        </p>
+                        <p className="text-sm mb-1" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                          Minted: {image.minted}
+                        </p>
+                        <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                          Collection: {image.collection}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
-        </div>
-      </div>
+            </div>
+          </div>
         </Card>
 
-        {/* Disclaimer Card */}
+        {/* Original Disclaimer Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Disclaimer</h2>
-    </div>
+          </div>
           <div className="pt-1 px-8 pb-8">
             {/* Disclaimer Image */}
             <div className="flex justify-center mb-2">
@@ -369,33 +381,17 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                 className="w-32 h-32"
                 unoptimized
               />
-        </div>
+            </div>
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              $DON is a art memecoin with no intrinsic value or expectation of financial return. There is no formal team or roadmap. The coin is for entertainment purposes only.
+              $DON is a art memecoin with no intrinsic value or expectation of financial return. There is no roadmap. The coin is for entertainment purposes only.
             </p>
           </div>
         </Card>
 
-        {/* Bottom Buy $DON Button */}
-        <div className="flex flex-col gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
-          <Button
-            className="bg-[#8660CC] hover:bg-[#8660CC] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
-            style={{ ...customStyles.pressStart, fontSize: '14px' }}
-            onClick={() => window.open('https://warpcast.com/~/channel/don', '_blank')}
-          >
-            Join Community
-          </Button>
-          <Button
-            className="bg-[#FF990A] hover:bg-[#FF990A] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
-            style={{ ...customStyles.pressStart, fontSize: '14px' }}
-          >
-            ???
-          </Button>
-        </div>
-        </div>
+      </div>
 
       {/* Footer */}
-      <p className="text-center text-white text-sm mt-6" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
+      <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
       
       <AudioPlayer audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" />
 
