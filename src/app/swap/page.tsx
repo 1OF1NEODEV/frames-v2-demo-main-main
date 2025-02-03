@@ -11,27 +11,71 @@ const customStyles = {
   },
 };
 
-export default function OriginPage() {
+export default function SwapPage() {
   return (
     <main className={`flex flex-col items-center justify-center min-h-screen ${styles.container}`}>
       <div className="max-w-[324px] mx-auto">
         <Card className="bg-[#FFD700] text-black p-4 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           {/* Main Content Area */}
           <div className="bg-white p-4 rounded-xl border-2 border-black">
-            {/* Content */}
-            <div className="text-center mb-6">
-              <h1 className="text-[#FFD700] mb-4" style={{ ...customStyles.pressStart, fontSize: '24px' }}>
-                ORIGIN
-              </h1>
-              <p className="text-black mb-4" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
-                Don Da Degen Dog is a pixel art character created by the talented artist known as "1OF1NEO". 
-                The character represents the spirit of decentralized finance (DeFi) and the Base blockchain community.
-              </p>
-              <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
-                With his distinctive style and playful demeanor, Don has become a beloved figure in the Base ecosystem, 
-                embodying both the fun and serious aspects of blockchain technology.
-              </p>
+            {/* Swap Interface */}
+            <div className="text-black mb-4" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
+              you give:
             </div>
+
+            {/* ETH Input */}
+            <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F] mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <div className="text-[#FFD700]" style={{ ...customStyles.pressStart, fontSize: '14px' }}>
+                  ETH
+                </div>
+                <div className="text-[#666666]" style={{ ...customStyles.pressStart, fontSize: '10px' }}>
+                  WALLET: 0.0000
+                </div>
+              </div>
+              <input
+                type="text"
+                className="w-full bg-transparent text-white outline-none text-right"
+                placeholder="0"
+                style={{ ...customStyles.pressStart, fontSize: '16px' }}
+              />
+            </div>
+
+            {/* Swap Arrows */}
+            <div className="flex justify-center gap-2 mb-6">
+              <div className="text-[#FFD700] text-2xl">↓</div>
+              <div className="text-black text-2xl">↑</div>
+            </div>
+
+            {/* DON Output */}
+            <div className="text-black mb-4" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
+              you receive:
+            </div>
+            <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F] mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <div className="text-[#FFD700]" style={{ ...customStyles.pressStart, fontSize: '14px' }}>
+                  DON
+                </div>
+                <div className="text-[#666666]" style={{ ...customStyles.pressStart, fontSize: '10px' }}>
+                  WALLET: 0.00
+                </div>
+              </div>
+              <input
+                type="text"
+                className="w-full bg-transparent text-white outline-none text-right"
+                placeholder="0.000"
+                style={{ ...customStyles.pressStart, fontSize: '16px' }}
+                readOnly
+              />
+            </div>
+
+            {/* Swap Button */}
+            <button
+              className="w-full bg-[#FFD700] text-black py-3 rounded-lg border-2 border-black hover:bg-[#FFE44D] transition-colors mb-6"
+              style={{ ...customStyles.pressStart, fontSize: '14px' }}
+            >
+              Swap
+            </button>
 
             {/* Menu Bar */}
             <div className="bg-[#FFD700] border-t-2 border-black p-2 -mx-4 -mb-4">

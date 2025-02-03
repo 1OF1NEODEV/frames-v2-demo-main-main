@@ -11,26 +11,46 @@ const customStyles = {
   },
 };
 
-export default function OriginPage() {
+export default function TokenomicsPage() {
   return (
     <main className={`flex flex-col items-center justify-center min-h-screen ${styles.container}`}>
       <div className="max-w-[324px] mx-auto">
         <Card className="bg-[#FFD700] text-black p-4 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           {/* Main Content Area */}
           <div className="bg-white p-4 rounded-xl border-2 border-black">
+            {/* Title */}
+            <h1 className="text-[#FFD700] mb-6 text-center" style={{ ...customStyles.pressStart, fontSize: '24px' }}>
+              TOKENOMICS
+            </h1>
+
             {/* Content */}
-            <div className="text-center mb-6">
-              <h1 className="text-[#FFD700] mb-4" style={{ ...customStyles.pressStart, fontSize: '24px' }}>
-                ORIGIN
-              </h1>
-              <p className="text-black mb-4" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
-                Don Da Degen Dog is a pixel art character created by the talented artist known as "1OF1NEO". 
-                The character represents the spirit of decentralized finance (DeFi) and the Base blockchain community.
-              </p>
-              <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
-                With his distinctive style and playful demeanor, Don has become a beloved figure in the Base ecosystem, 
-                embodying both the fun and serious aspects of blockchain technology.
-              </p>
+            <div className="space-y-4 mb-6">
+              <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F]">
+                <h2 className="text-[#FFD700] mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
+                  TOTAL SUPPLY
+                </h2>
+                <p className="text-white" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
+                  100,000,000 DON
+                </p>
+              </div>
+
+              <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F]">
+                <h2 className="text-[#FFD700] mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
+                  TAX
+                </h2>
+                <p className="text-white" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
+                  0% Buy / 0% Sell
+                </p>
+              </div>
+
+              <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F]">
+                <h2 className="text-[#FFD700] mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
+                  LIQUIDITY
+                </h2>
+                <p className="text-white" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
+                  100% Locked Forever
+                </p>
+              </div>
             </div>
 
             {/* Menu Bar */}
