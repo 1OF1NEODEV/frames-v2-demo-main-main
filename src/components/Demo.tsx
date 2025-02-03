@@ -189,35 +189,15 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             </Button>
           </div>
         </Card>
-   {/* Buy Button */}
-   <Button 
-          className="bg-[#8660CC] hover:bg-[#7450b3] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out]"
+
+        {/* Buy Button */}
+        <Button 
+          className="bg-[#2A69F7] hover:bg-[#2A69F7] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out] shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]"
           style={{ ...customStyles.pressStart, fontSize: '14px' }}
           onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
         >
           Buy $DON
         </Button>
-         {/* First Card - Main Info - Origin */}
-         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Origin</h2>
-          </div>
-          <div className="p-8 flex flex-col items-center space-y-3">
-            {/* Origin Image */}
-            <div className="flex justify-center mb-2">
-              <Image
-                src="/DON FULL BODY v2.gif"
-                alt="DON character with purple top hat and headphones"
-                width={100}
-                height={100}
-                className="object-contain"
-              />
-            </div>
-            <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              Don Da Degen Dog is a daring and spirited meme coin that merges art, humor, and the relentless enegry of a true degen. With its charasmatic canine mascot, Don Da Degen Dog is here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.<br/>
-            </p>
-          </div>
-        </Card>
 
         {/* Second Card - Tokenomics */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
@@ -398,6 +378,46 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       <p className="text-center text-white text-sm mt-6" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
       
       <AudioPlayer audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" />
+
+      {/* Pixel Style Footer Menu */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#FFD700] border-t-4 border-black p-4 z-50">
+        <div className="max-w-[324px] mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex flex-col items-center">
+              <div className="w-6 h-6 flex items-center justify-center" style={{ ...customStyles.pressStart }}>
+                🏠
+              </div>
+            </Link>
+            <div className="text-black font-bold">:</div>
+            <Link href="/origin" className="flex flex-col items-center">
+              <div className="w-6 h-6 flex items-center justify-center" style={{ ...customStyles.pressStart }}>
+                ↑
+              </div>
+            </Link>
+            <div className="text-black font-bold">:</div>
+            <Link href="/gallery" className="flex flex-col items-center">
+              <div className="w-6 h-6 flex items-center justify-center" style={{ ...customStyles.pressStart }}>
+                🏆
+              </div>
+            </Link>
+            <div className="text-black font-bold">:</div>
+            <a href="#tokenomics" className="flex flex-col items-center">
+              <div className="w-6 h-6 flex items-center justify-center" style={{ ...customStyles.pressStart }}>
+                🛍️
+              </div>
+            </a>
+            <div className="text-black font-bold">:</div>
+            <a href="#disclaimer" className="flex flex-col items-center">
+              <div className="w-6 h-6 flex items-center justify-center" style={{ ...customStyles.pressStart }}>
+                🔧
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Add padding to prevent content from being hidden behind the navigation bar */}
+      <div className="h-24"></div>
 
       {/* Lightbox */}
       <Lightbox
