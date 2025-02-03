@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import { signIn, signOut, getCsrfToken } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -27,24 +27,41 @@ const customStyles = {
     fontFamily: '"Press Start 2P", cursive',
   },
   container: {
-    minHeight: '100vh',
     padding: '1rem',
     paddingBottom: '2rem',
-    backgroundImage: 'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png")',
+    backgroundImage: 'url("/Backyard.png")',
     margin: '0 auto',
-    backgroundColor: '#2A69F7',
-    backgroundSize: 'auto 100vh',
-    backgroundPosition: 'top center',
-    backgroundAttachment: 'fixed',
-
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%',
+    backgroundPosition: 'center',
     width: '100%',
     maxWidth: '100vw',
-
+    height: '100%',
+    minHeight: '100vh'
   }
 };
 
 export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): JSX.Element {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<null | {
+    src: string;
+    title: string;
+    artist: string;
+    description: string;
+    minted: string;
+    collection: string;
+  }>(null);
+
+  // Add audio ref
+  const barkAudioRef = useRef<HTMLAudioElement>(null);
+
+  const playBarkSound = () => {
+    if (barkAudioRef.current) {
+      barkAudioRef.current.currentTime = 0;
+      barkAudioRef.current.play();
+    }
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -55,16 +72,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       load();
     }
   }, [isSDKLoaded]);
-  const [isCopied, setIsCopied] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<null | {
-    src: string;
-    title: string;
-    artist: string;
-    description: string;
-    minted: string;
-    collection: string;
-  }>(null);
-  
+
   const copyToClipboard = useCallback(() => {
     navigator.clipboard.writeText(contractAddress);
     setIsCopied(true);
@@ -124,6 +132,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
   return (
     <main className={`flex flex-col ${styles.container}`}>
+      <audio ref={barkAudioRef} src="/dog-bark-type-04-293288.mp3" preload="auto" />
+      
       <div className="max-w-[324px] mx-auto space-y-6 mt-8">
         {/* Hero Title */}
         <div className="text-center mb-6">
@@ -133,39 +143,75 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
         {/* Contract Address Card */}
         <Card className="bg-white text-black p-4 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-          <div className="flex items-center justify-between">
-            <div 
-              className="text-sm break-all pr-4 cursor-pointer hover:text-gray-600 transition-colors"
-              style={customStyles.bebasNeueRegular}
-              onClick={copyToClipboard}
-              role="button"
-              aria-label="Click to copy contract address"
-            >
-              {contractAddress}
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between">
+              <div 
+                className="text-sm break-all pr-4 cursor-pointer hover:text-gray-600 transition-colors"
+                style={customStyles.bebasNeueRegular}
+                onClick={copyToClipboard}
+                role="button"
+                aria-label="Click to copy contract address"
+              >
+                {contractAddress}
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 hover:bg-gray-100"
+                onClick={copyToClipboard}
+              >
+                {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                <span className="sr-only">
+                  {isCopied ? "Address copied" : "Copy contract address"}
+                </span>
+              </Button>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8 hover:bg-gray-100"
-              onClick={copyToClipboard}
-            >
-              {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-              <span className="sr-only">
-                {isCopied ? "Address copied" : "Copy contract address"}
-              </span>
-            </Button>
+            <div className="flex justify-center gap-4 mt-4">
+              <Image 
+                src="/icons8-twitter-bird-32.png"
+                alt="Twitter Bird Logo"
+                width={24}
+                height={24}
+                className="hover:opacity-80 transition-opacity cursor-pointer"
+                onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
+                unoptimized
+              />
+              <Image 
+                src="/icons8-telegram-app-32.png"
+                alt="Telegram Logo"
+                width={24}
+                height={24}
+                className="hover:opacity-80 transition-opacity cursor-pointer"
+                onClick={() => window.open('https://t.me/dondadegendog', '_blank')}
+                unoptimized
+              />
+              <Image 
+                src="/icons8-instagram-32.png"
+                alt="Instagram Logo"
+                width={24}
+                height={24}
+                className="hover:opacity-80 transition-opacity cursor-pointer"
+                onClick={() => window.open('https://instagram.com/dondadegendog', '_blank')}
+                unoptimized
+              />
+            </div>
           </div>
         </Card>
    {/* Buy Button */}
    <Button 
           className="bg-[#2A69F7] hover:bg-[#2A69F7] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out] shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]"
           style={{ ...customStyles.pressStart, fontSize: '14px' }}
-          onClick={() => window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank')}
+          onClick={() => {
+            playBarkSound();
+            window.open('https://clank.fun/t/0x2427e231b401e012edacd1c4dd700ea2d4376ed0', '_blank');
+          }}
+          onMouseEnter={playBarkSound}
         >
           Buy $DON
         </Button>
-         {/* First Card - Main Info - Origin */}
-         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+
+        {/* First Card - Main Info - Origin */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="origin">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Origin</h2>
           </div>
@@ -187,9 +233,9 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         </Card>
 
         {/* Second Card - Tokenomics */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="tokenomics">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Donomics</h2>
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Tokenomics</h2>
           </div>
           <div className="p-8">
             {/* Tokenomics Image */}
@@ -211,7 +257,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         </Card>
 
         {/* How to Buy Card */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="how-to-buy">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>How to Buy</h2>
           </div>
@@ -282,19 +328,21 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
         </Card>
 
-        {/* Buttons Container */}
-        <div className="flex justify-center gap-4 mt-12 mb-20 max-w-[324px] mx-auto">
-            <Button
-              className="bg-[#8660CC] hover:bg-[#8660CC] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out] shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]"
-              style={{ ...customStyles.pressStart, fontSize: '14px' }}
-              onClick={() => window.open('https://www.geckoterminal.com/base/pools/0xbb27a2B653533f5CD69Eeab06F22DB7EB3b9A453', '_blank')}
-            >
-              Buy $DON
-            </Button>
-          </div>
+        {/* Buy Button after How to Buy */}
+        <Button
+          className="bg-[#8660CC] hover:bg-[#8660CC] text-white font-bold py-2 px-4 rounded-lg border-4 border-black w-full hover:animate-[wiggle_1.5s_ease-in-out] shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]"
+          style={{ ...customStyles.pressStart, fontSize: '14px' }}
+          onClick={() => {
+            playBarkSound();
+            window.open('https://www.geckoterminal.com/base/pools/0xbb27a2B653533f5CD69Eeab06F22DB7EB3b9A453', '_blank');
+          }}
+          onMouseEnter={playBarkSound}
+        >
+          Buy $DON
+        </Button>
 
-        {/* Third Card - Gallery */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="swap-section">
+        {/* Gallery Card */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="gallery">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Gallery</h2>
           </div>
@@ -307,7 +355,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   className="w-full aspect-square relative rounded-xl overflow-hidden bg-gray-100 cursor-pointer group [perspective:1000px]"
                   onClick={() => setSelectedImage(image)}
                 >
-                  <div className="relative w-full h-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                  <div className="relative w-full h-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                     {/* Front - Image Side */}
                     <div className="absolute inset-0 [backface-visibility:hidden]">
                       {/* Base Token Badge */}
@@ -315,8 +363,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                         <Image 
                           src="/token--base.png"
                           alt="Base Token"
-                          width={16}
-                          height={16}
+                          width={12}
+                          height={12}
                           className="rounded-full"
                           unoptimized
                         />
@@ -365,8 +413,60 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
         </Card>
 
-        {/* Original Disclaimer Card */}
+        {/* Meet the Artist Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Meet the Artist</h2>
+          </div>
+          <div className="pt-6 px-4 pb-4">
+            {/* Artist Image */}
+            <div className="flex justify-center mb-3">
+              <Image 
+                src="/1OF1NEO DON PAINTER.png"
+                alt="1OF1NEO Artist Image"
+                width={250}
+                height={250}
+                className="object-contain"
+                unoptimized
+              />
+            </div>
+            <p className="text-center text-sm leading-relaxed mb-2" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              1OF1NEO
+            </p>
+            <div className="flex justify-center gap-4">
+              <Image 
+                src="/icons8-twitter-bird-32.png"
+                alt="Twitter Bird Logo"
+                width={24}
+                height={24}
+                className="hover:opacity-80 transition-opacity cursor-pointer"
+                onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
+                unoptimized
+              />
+              <Image 
+                src="/icons8-telegram-app-32.png"
+                alt="Telegram Logo"
+                width={24}
+                height={24}
+                className="hover:opacity-80 transition-opacity cursor-pointer"
+                onClick={() => window.open('https://t.me/dondadegendog', '_blank')}
+                unoptimized
+              />
+              <Image 
+                src="/icons8-instagram-32.png"
+                alt="Instagram Logo"
+                width={24}
+                height={24}
+                className="hover:opacity-80 transition-opacity cursor-pointer"
+                onClick={() => window.open('https://instagram.com/dondadegendog', '_blank')}
+                unoptimized
+              />
+            </div>
+          </div>
+        </Card>
+
+        {/* Disclaimer Card */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="disclaimer">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Disclaimer</h2>
           </div>
@@ -389,6 +489,65 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         </Card>
 
       </div>
+
+      {/* Navigation Menu Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#FFD700] border-t-4 border-black p-4 z-50">
+        <div className="max-w-[324px] mx-auto flex justify-between items-center">
+          <a href="#origin" className="flex flex-col items-center">
+            <Image 
+              src="/icons8-home-32.png"
+              alt="Origin"
+              width={32}
+              height={32}
+              className="mb-1 hover:opacity-80"
+              unoptimized
+            />
+          </a>
+          <a href="#tokenomics" className="flex flex-col items-center">
+            <Image 
+              src="/icons8-shop-32.png"
+              alt="Tokenomics"
+              width={32}
+              height={32}
+              className="mb-1 hover:opacity-80"
+              unoptimized
+            />
+          </a>
+          <a href="#how-to-buy" className="flex flex-col items-center">
+            <Image 
+              src="/icons8-gallery-32.png"
+              alt="How to Buy"
+              width={32}
+              height={32}
+              className="mb-1 hover:opacity-80"
+              unoptimized
+            />
+          </a>
+          <a href="#gallery" className="flex flex-col items-center">
+            <Image 
+              src="/icons8-trophy-32.png"
+              alt="Gallery"
+              width={32}
+              height={32}
+              className="mb-1 hover:opacity-80"
+              unoptimized
+            />
+          </a>
+          <a href="#disclaimer" className="flex flex-col items-center">
+            <Image 
+              src="/icons8-settings-32.png"
+              alt="Disclaimer"
+              width={32}
+              height={32}
+              className="mb-1 hover:opacity-80"
+              unoptimized
+            />
+          </a>
+        </div>
+      </div>
+
+      {/* Add padding to prevent content from being hidden behind the navigation bar */}
+      <div className="h-24"></div>
 
       {/* Footer */}
       <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
