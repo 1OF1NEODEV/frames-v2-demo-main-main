@@ -130,21 +130,116 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     }
   ];
 
+  const [showTrddPopup, setShowTrddPopup] = useState(false);
+
   return (
     <main className={`flex flex-col ${styles.container}`}>
       <audio ref={barkAudioRef} src="/dog-bark-type-04-293288.mp3" preload="auto" />
       
-      <div className="max-w-[324px] mx-auto space-y-6 mt-8">
-        {/* Hero Title */}
-        <div className="text-center mb-6">
-          <h1 className="text-4xl font-bold mb-2 font-press-start text-white" style={customStyles.pressStart}>DON DA DEGEN DOG</h1>
-          <p className="text-xl text-white" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
-        </div>
+      {/* TRDD Button */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          className="bg-[#E3F2FF] hover:bg-[#D1E9FF] text-[#1E293B] font-bold px-1.5 py-1 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
+          style={{ ...customStyles.pressStart, fontSize: '8px' }}
+          onClick={() => setShowTrddPopup(true)}
+        >
+          DYOR
+        </button>
+      </div>
 
+      {/* TRDD Popup */}
+      {showTrddPopup && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
+          <div className="bg-[#E3F2FF] rounded-3xl p-0 max-w-[300px] w-full mx-4 relative border-2 border-[#1E293B]">
+            <button
+              className="absolute top-3 right-3 text-white hover:opacity-70 z-10"
+              onClick={() => setShowTrddPopup(false)}
+              style={{ ...customStyles.pressStart, fontSize: '16px' }}
+            >
+              ×
+            </button>
+
+            {/* Black Header with Title */}
+            <div className="w-full bg-black text-white px-6 py-4 flex justify-center items-center rounded-t-3xl">
+              <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>
+                Disclaimer
+              </h2>
+            </div>
+            
+            <div className="p-4">
+              {/* Disclaimer Image */}
+              <div className="flex justify-center mb-2">
+                <Image 
+                  src="/disclaimer.png"
+                  alt="Disclaimer illustration"
+                  width={150}
+                  height={150}
+                  className="w-36 h-36"
+                  unoptimized
+                />
+              </div>
+
+              {/* Disclaimer Text */}
+              <p className="text-center text-xs leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                $DON is a art memecoin with no intrinsic value or expectation of financial return. There is no roadmap. The coin is for entertainment purposes only.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-[324px] mx-auto space-y-6 mt-8">
         {/* Contract Address Card */}
         <Card className="bg-white text-black p-4 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="flex flex-col">
-            <div className="flex items-center justify-between">
+            {/* Title Section */}
+            <div className="text-center mb-4">
+              {/* DON Character Image */}
+              <div className="flex justify-center mb-4">
+                <Image
+                  src="/DON FULL BODY v2.gif"
+                  alt="DON character with purple top hat and headphones"
+                  width={120}
+                  height={120}
+                  className="object-contain"
+                  unoptimized
+                />
+              </div>
+              <h1 className="text-3xl font-bold mb-2" style={customStyles.pressStart}>DON DA DEGEN DOG</h1>
+              <p className="text-lg mb-4" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
+              
+              {/* Social Icons */}
+              <div className="flex justify-center gap-4 mb-2">
+                <Image 
+                  src="/icons8-twitter-bird-32.png"
+                  alt="Twitter Bird Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
+                  unoptimized
+                />
+                <Image 
+                  src="/icons8-telegram-app-32.png"
+                  alt="Telegram Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://t.me/dondadegendog', '_blank')}
+                  unoptimized
+                />
+                <Image 
+                  src="/icons8-instagram-32.png"
+                  alt="Instagram Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://instagram.com/dondadegendog', '_blank')}
+                  unoptimized
+                />
+              </div>
+            </div>
+            <div className="flex items-center justify-between mt-0">
               <div 
                 className="text-sm break-all pr-4 cursor-pointer hover:text-gray-600 transition-colors"
                 style={customStyles.bebasNeueRegular}
@@ -165,35 +260,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   {isCopied ? "Address copied" : "Copy contract address"}
                 </span>
               </Button>
-            </div>
-            <div className="flex justify-center gap-4 mt-4">
-              <Image 
-                src="/icons8-twitter-bird-32.png"
-                alt="Twitter Bird Logo"
-                width={24}
-                height={24}
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
-                unoptimized
-              />
-              <Image 
-                src="/icons8-telegram-app-32.png"
-                alt="Telegram Logo"
-                width={24}
-                height={24}
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                onClick={() => window.open('https://t.me/dondadegendog', '_blank')}
-                unoptimized
-              />
-              <Image 
-                src="/icons8-instagram-32.png"
-                alt="Instagram Logo"
-                width={24}
-                height={24}
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                onClick={() => window.open('https://instagram.com/dondadegendog', '_blank')}
-                unoptimized
-              />
             </div>
           </div>
         </Card>
@@ -216,16 +282,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Origin</h2>
           </div>
           <div className="p-8 flex flex-col items-center space-y-3">
-            {/* Origin Image */}
-            <div className="flex justify-center mb-2">
-              <Image
-                src="/DON FULL BODY v2.gif"
-                alt="DON character with purple top hat and headphones"
-                width={100}
-                height={100}
-                className="object-contain"
-              />
-            </div>
             <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
               Don Da Degen Dog is a daring and spirited meme coin that merges art, humor, and the relentless enegry of a true degen. With its charasmatic canine mascot, Don Da Degen Dog is here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.<br/>
             </p>
@@ -465,94 +521,14 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
         </Card>
 
-        {/* Disclaimer Card */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="disclaimer">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Disclaimer</h2>
-          </div>
-          <div className="pt-1 px-8 pb-8">
-            {/* Disclaimer Image */}
-            <div className="flex justify-center mb-2">
-              <Image 
-                src="/disclaimer.png"
-                alt="Disclaimer illustration"
-                width={128}
-                height={128}
-                className="w-32 h-32"
-                unoptimized
-              />
-            </div>
-            <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              $DON is a art memecoin with no intrinsic value or expectation of financial return. There is no roadmap. The coin is for entertainment purposes only.
-            </p>
-          </div>
-        </Card>
-
       </div>
-
-      {/* Navigation Menu Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#FFD700] border-t-4 border-black p-4 z-50">
-        <div className="max-w-[324px] mx-auto flex justify-between items-center">
-          <a href="#origin" className="flex flex-col items-center">
-            <Image 
-              src="/icons8-home-32.png"
-              alt="Origin"
-              width={32}
-              height={32}
-              className="mb-1 hover:opacity-80"
-              unoptimized
-            />
-          </a>
-          <a href="#tokenomics" className="flex flex-col items-center">
-            <Image 
-              src="/icons8-shop-32.png"
-              alt="Tokenomics"
-              width={32}
-              height={32}
-              className="mb-1 hover:opacity-80"
-              unoptimized
-            />
-          </a>
-          <a href="#how-to-buy" className="flex flex-col items-center">
-            <Image 
-              src="/icons8-gallery-32.png"
-              alt="How to Buy"
-              width={32}
-              height={32}
-              className="mb-1 hover:opacity-80"
-              unoptimized
-            />
-          </a>
-          <a href="#gallery" className="flex flex-col items-center">
-            <Image 
-              src="/icons8-trophy-32.png"
-              alt="Gallery"
-              width={32}
-              height={32}
-              className="mb-1 hover:opacity-80"
-              unoptimized
-            />
-          </a>
-          <a href="#disclaimer" className="flex flex-col items-center">
-            <Image 
-              src="/icons8-settings-32.png"
-              alt="Disclaimer"
-              width={32}
-              height={32}
-              className="mb-1 hover:opacity-80"
-              unoptimized
-            />
-          </a>
-        </div>
-      </div>
-
-      {/* Add padding to prevent content from being hidden behind the navigation bar */}
-      <div className="h-24"></div>
 
       {/* Footer */}
       <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
       
-      <AudioPlayer audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" />
+      <AudioPlayer 
+        audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" 
+      />
 
       {/* Lightbox */}
       <Lightbox

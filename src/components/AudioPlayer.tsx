@@ -7,7 +7,7 @@ interface AudioPlayerProps {
 
 export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -24,7 +24,17 @@ export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const handleEnded = () => setIsPlaying(false);
+    // Start playing automatically
+    audio.play().catch(error => {
+      console.log("Autoplay prevented:", error);
+      setIsPlaying(false);
+    });
+
+    const handleEnded = () => {
+      audio.currentTime = 0;
+      audio.play();
+    };
+
     audio.addEventListener('ended', handleEnded);
 
     return () => {
@@ -34,7 +44,7 @@ export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
 
   return (
     <div className="fixed top-4 left-4 z-50">
-      <audio ref={audioRef} src={audioSrc} />
+      <audio ref={audioRef} src={audioSrc} loop />
       <button
         onClick={togglePlay}
         className={`p-2 transition-transform hover:scale-110 ${isPlaying ? 'animate-pulse' : ''}`}
