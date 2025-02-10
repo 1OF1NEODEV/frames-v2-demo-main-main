@@ -34,15 +34,15 @@ export default function OriginPage() {
             </div>
 
             {/* Menu Bar */}
-            <div className="bg-[#FFD700] border-t-2 border-black p-2 -mx-4 -mb-4 rounded-b-xl">
+            <div className="bg-black border-t-2 border-black p-2 -mx-4 -mb-4 rounded-b-xl">
               <div className="flex justify-center items-center">
                 <div className="flex items-center gap-3">
                   <Link href="/" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🏠
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/swap" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center">
                       <Image
@@ -50,26 +50,26 @@ export default function OriginPage() {
                         alt="Swap"
                         width={16}
                         height={16}
-                        className="w-4 h-4"
+                        className="w-4 h-4 brightness-0 invert"
                         unoptimized
                       />
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/origin" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       ↑
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/gallery" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🏆
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/tokenomics" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🛍️
                     </div>
                   </Link>

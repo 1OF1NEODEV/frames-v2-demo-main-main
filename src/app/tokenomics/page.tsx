@@ -25,44 +25,35 @@ export default function TokenomicsPage() {
 
             {/* Content */}
             <div className="space-y-4 mb-6">
-              <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F]">
-                <h2 className="text-[#FFD700] mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
-                  TOTAL SUPPLY
-                </h2>
-                <p className="text-white" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
+              <div className="text-center">
+                <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
                   100,000,000 DON
                 </p>
               </div>
 
-              <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F]">
-                <h2 className="text-[#FFD700] mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
-                  TAX
-                </h2>
-                <p className="text-white" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
+              <div className="text-center">
+                <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
                   0% Buy / 0% Sell
                 </p>
               </div>
 
-              <div className="bg-[#1F1F0F] p-3 rounded-lg border-2 border-[#3F3F2F]">
-                <h2 className="text-[#FFD700] mb-2" style={{ ...customStyles.pressStart, fontSize: '12px' }}>
-                  LIQUIDITY
-                </h2>
-                <p className="text-white" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
+              <div className="text-center">
+                <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
                   100% Locked Forever
                 </p>
               </div>
             </div>
 
             {/* Menu Bar */}
-            <div className="bg-[#FFD700] border-t-2 border-black p-2 -mx-4 -mb-4 rounded-b-xl">
+            <div className="bg-black border-t-2 border-black p-2 -mx-4 -mb-4 rounded-b-xl">
               <div className="flex justify-center items-center">
                 <div className="flex items-center gap-3">
                   <Link href="/" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🏠
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/swap" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center">
                       <Image
@@ -70,26 +61,26 @@ export default function TokenomicsPage() {
                         alt="Swap"
                         width={16}
                         height={16}
-                        className="w-4 h-4"
+                        className="w-4 h-4 brightness-0 invert"
                         unoptimized
                       />
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/origin" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       ↑
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/gallery" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🏆
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/tokenomics" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🛍️
                     </div>
                   </Link>

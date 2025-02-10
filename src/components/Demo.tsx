@@ -27,19 +27,17 @@ const customStyles = {
     fontFamily: '"Press Start 2P", cursive',
   },
   container: {
-    minHeight: '100vh',
     padding: '1rem',
     paddingBottom: '2rem',
-    backgroundImage: 'url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png")',
+    backgroundImage: 'url("/DON HOMER MEME.png")',
     margin: '0 auto',
-    backgroundColor: '#2A69F7',
-    backgroundSize: 'auto 100vh',
-    backgroundPosition: 'top center',
-    backgroundAttachment: 'fixed',
-
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     width: '100%',
     maxWidth: '100vw',
-
+    height: '100%',
+    minHeight: '100vh'
   }
 };
 
@@ -75,8 +73,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               <Image 
                 src="/DON FULL BODY v2.gif"
                 alt="Don Da Degen Dog Icon"
-                width={175}
-                height={175}
+                width={125}
+                height={125}
                 className="w-30 h-30"
                 unoptimized
               />
@@ -90,27 +88,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
                 COOLEST DEGENERATE PIXEL DOG ON BASE
               </p>
-            </div>
-
-            {/* Contract Address Section */}
-            <div className="bg-[#1F1F0F] p-2 rounded-lg border-2 border-[#3F3F2F] max-w-[280px] mx-auto mb-6">
-              <div 
-                className="text-[#FFD700] text-sm break-all pr-2 cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-between"
-                style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}
-                onClick={copyToClipboard}
-                role="button"
-                aria-label="Click to copy contract address"
-              >
-                <span>{contractAddress}</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 text-[#FFD700] hover:text-[#FFE44D]"
-                  onClick={copyToClipboard}
-                >
-                  {isCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                </Button>
-              </div>
             </div>
 
             {/* Social Icons */}
@@ -136,26 +113,49 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               </Link>
               <Link href="https://www.instagram.com/dononbase/" className="hover:opacity-80">
                 <span className="block w-6 h-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
-                    <polygon fill="#589bd4" points="28,6 28,26 26,26 26,28 6,28 6,26 4,26 4,6 6,6 6,4 26,4 26,6"></polygon>
-                    <rect width="16" height="16" x="8" y="8" fill="#e6e5e5"></rect>
-                    <rect width="2" height="2" x="22" y="8" fill="#b6b5b5"></rect>
-                    <rect width="8" height="8" x="12" y="12" fill="#b6b5b5"></rect>
-                  </svg>
+                  <Image
+                    src="/icons8-instagram-32.png"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                    unoptimized
+                  />
                 </span>
               </Link>
             </div>
 
+            {/* Contract Address Section */}
+            <div className="bg-[#1F1F0F] p-2 rounded-lg border-2 border-[#3F3F2F] max-w-[280px] mx-auto mb-6">
+              <div 
+                className="text-[#FFD700] text-sm break-all pr-2 cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-between"
+                style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}
+                onClick={copyToClipboard}
+                role="button"
+                aria-label="Click to copy contract address"
+              >
+                <span>{contractAddress}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 text-[#FFD700] hover:text-[#FFE44D]"
+                  onClick={copyToClipboard}
+                >
+                  {isCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                </Button>
+              </div>
+            </div>
+
             {/* Menu Bar */}
-            <div className="bg-[#FFD700] border-t-2 border-black p-3 -mx-4 -mb-4 rounded-b-xl">
+            <div className="bg-black border-t-2 border-black p-3 -mx-4 -mb-4 rounded-b-xl">
               <div className="flex justify-center items-center">
                 <div className="flex items-center gap-4">
                   <Link href="/" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🏠
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/swap" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center">
                       <Image
@@ -163,26 +163,26 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                         alt="Swap"
                         width={16}
                         height={16}
-                        className="w-4 h-4"
+                        className="w-4 h-4 brightness-0 invert"
                         unoptimized
                       />
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/origin" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       ↑
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/gallery" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🏆
                     </div>
                   </Link>
-                  <div className="text-black font-bold">:</div>
+                  <div className="text-white font-bold">:</div>
                   <Link href="/tokenomics" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
+                    <div className="w-5 h-5 flex items-center justify-center text-sm text-white" style={{ ...customStyles.pressStart }}>
                       🛍️
                     </div>
                   </Link>
@@ -197,9 +197,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       <p className="text-center text-white text-sm mt-6" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
 
       <AudioPlayer audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" />
-
-      {/* Add padding to prevent content from being hidden behind the navigation bar */}
-      <div className="h-24"></div>
     </main>
   );
 }

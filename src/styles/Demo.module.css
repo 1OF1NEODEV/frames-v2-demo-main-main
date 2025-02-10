@@ -4,14 +4,15 @@
 
 .container {
   min-height: 100vh;
+  height: 100vh;
   padding: 1rem;
-  padding-bottom: 2rem;
-  background-image: url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/moblieview2-z06BPRebXG0ei4GazVfAoQthwFYyTC.png");
+  background-image: url("/DON HOMER MEME.png");
   margin: 0 auto;
-  background-color: #2A69F7;
-  background-size: auto 100vh;
-  background-position: top center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   width: 100%;
   max-width: 100vw;
+  overflow: hidden;
+  background-attachment: fixed;
 }
