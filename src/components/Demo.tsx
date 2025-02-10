@@ -81,11 +81,11 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
   const galleryImages = [
     {
-      src: "/DON TRUMP.png",
-      title: "DON TRUMP",
+      src: "/don painter v2.gif",
+      title: "DON THE PAINTER",
       artist: "1OF1NEO",
       description: "68 × 70 px",
-      minted: "January 24, 2024",
+      minted: "???",
       collection: "Don's Doodles"
     },
     {
@@ -465,58 +465,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </Card>
-
-        {/* Meet the Artist Card */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Meet the Artist</h2>
-          </div>
-          <div className="pt-6 px-4 pb-4">
-            {/* Artist Image */}
-            <div className="flex justify-center mb-3">
-              <Image 
-                src="/1OF1NEO DON PAINTER.png"
-                alt="1OF1NEO Artist Image"
-                width={250}
-                height={250}
-                className="object-contain"
-                unoptimized
-              />
-            </div>
-            <p className="text-center text-sm leading-relaxed mb-2" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              1OF1NEO
-            </p>
-            <div className="flex justify-center gap-4">
-              <Image 
-                src="/icons8-twitter-bird-32.png"
-                alt="Twitter Bird Logo"
-                width={24}
-                height={24}
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
-                unoptimized
-              />
-              <Image 
-                src="/icons8-telegram-app-32.png"
-                alt="Telegram Logo"
-                width={24}
-                height={24}
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                onClick={() => window.open('https://t.me/dondadegendog', '_blank')}
-                unoptimized
-              />
-              <Image 
-                src="/icons8-instagram-32.png"
-                alt="Instagram Logo"
-                width={24}
-                height={24}
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                onClick={() => window.open('https://instagram.com/dondadegendog', '_blank')}
-                unoptimized
-              />
             </div>
           </div>
         </Card>
