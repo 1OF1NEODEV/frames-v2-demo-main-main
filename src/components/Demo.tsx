@@ -73,10 +73,10 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             {/* Character Image */}
             <div className="flex justify-center mb-6">
               <Image 
-                src="/don painter.gif"
+                src="/DON FULL BODY v2.gif"
                 alt="Don Da Degen Dog Icon"
-                width={400}
-                height={400}
+                width={175}
+                height={175}
                 className="w-30 h-30"
                 unoptimized
               />
@@ -147,12 +147,25 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             </div>
 
             {/* Menu Bar */}
-            <div className="bg-[#FFD700] border-t-2 border-black p-3 -mx-4 -mb-4">
+            <div className="bg-[#FFD700] border-t-2 border-black p-3 -mx-4 -mb-4 rounded-b-xl">
               <div className="flex justify-center items-center">
                 <div className="flex items-center gap-4">
                   <Link href="/" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
                       🏠
+                    </div>
+                  </Link>
+                  <div className="text-black font-bold">:</div>
+                  <Link href="/swap" className="flex flex-col items-center">
+                    <div className="w-5 h-5 flex items-center justify-center">
+                      <Image
+                        src="/icons8-data-transfer-32.png"
+                        alt="Swap"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4"
+                        unoptimized
+                      />
                     </div>
                   </Link>
                   <div className="text-black font-bold">:</div>
@@ -171,19 +184,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   <Link href="/tokenomics" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
                       🛍️
-                    </div>
-                  </Link>
-                  <div className="text-black font-bold">:</div>
-                  <Link href="/swap" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center">
-                      <Image
-                        src="/icons8-data-transfer-32.png"
-                        alt="Swap"
-                        width={16}
-                        height={16}
-                        className="w-4 h-4"
-                        unoptimized
-                      />
                     </div>
                   </Link>
                 </div>

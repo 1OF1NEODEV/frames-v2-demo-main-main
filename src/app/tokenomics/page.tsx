@@ -54,12 +54,25 @@ export default function TokenomicsPage() {
             </div>
 
             {/* Menu Bar */}
-            <div className="bg-[#FFD700] border-t-2 border-black p-2 -mx-4 -mb-4">
+            <div className="bg-[#FFD700] border-t-2 border-black p-2 -mx-4 -mb-4 rounded-b-xl">
               <div className="flex justify-center items-center">
                 <div className="flex items-center gap-3">
                   <Link href="/" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
                       🏠
+                    </div>
+                  </Link>
+                  <div className="text-black font-bold">:</div>
+                  <Link href="/swap" className="flex flex-col items-center">
+                    <div className="w-5 h-5 flex items-center justify-center">
+                      <Image
+                        src="/icons8-data-transfer-32.png"
+                        alt="Swap"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4"
+                        unoptimized
+                      />
                     </div>
                   </Link>
                   <div className="text-black font-bold">:</div>
@@ -78,19 +91,6 @@ export default function TokenomicsPage() {
                   <Link href="/tokenomics" className="flex flex-col items-center">
                     <div className="w-5 h-5 flex items-center justify-center text-sm" style={{ ...customStyles.pressStart }}>
                       🛍️
-                    </div>
-                  </Link>
-                  <div className="text-black font-bold">:</div>
-                  <Link href="/swap" className="flex flex-col items-center">
-                    <div className="w-5 h-5 flex items-center justify-center">
-                      <Image
-                        src="/icons8-data-transfer-32.png"
-                        alt="Swap"
-                        width={16}
-                        height={16}
-                        className="w-4 h-4"
-                        unoptimized
-                      />
                     </div>
                   </Link>
                 </div>
