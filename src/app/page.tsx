@@ -7,12 +7,12 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/frame-cast.png`,
   button: {
-    title: "Launch Frame",
+    title: "Launch Don",
     action: {
       type: "launch_frame",
-      name: "Don Da Degen Dog",
+      name: "Don The Dog",
       url: appUrl,
-      splashImageUrl: `${appUrl}/icon.png`,
+      splashImageUrl: `${appUrl}/COMING SOON (2).png`,
       splashBackgroundColor: "#ffffff",
     },
   },
@@ -22,9 +22,9 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Don Da Degen Dog",
+    title: "Don The Dog",
     openGraph: {
-      title: "Don Da Degen Dog",
+      title: "Don The Dog",
       description: "Coolest Degenerate Pixel Dog on Base.",
     },
     other: {

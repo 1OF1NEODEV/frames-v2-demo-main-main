@@ -16,8 +16,8 @@ import { Buy } from '@coinbase/onchainkit/buy';
 import type { Token } from '@coinbase/onchainkit/token';
 import '@coinbase/onchainkit/styles.css';
 import { 
-  Wallet,
-  WalletDropdown,
+  Wallet, 
+  WalletDropdown, 
   WalletDropdownBasename,
   WalletDropdownDisconnect
 } from '@coinbase/onchainkit/wallet';
@@ -61,6 +61,7 @@ const customStyles = {
 export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): JSX.Element {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [isKennelImageFlipped, setIsKennelImageFlipped] = useState(false);
   const [selectedImage, setSelectedImage] = useState<null | {
     src: string;
     title: string;
@@ -69,6 +70,102 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     minted: string;
     collection: string;
   }>(null);
+
+  // Memory Game State
+  const [cards, setCards] = useState<Array<{ id: number; image: string; isFlipped: boolean; isMatched: boolean }>>([]);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [canFlip, setCanFlip] = useState(true);
+
+  // Memory Game Images
+  const gameImages = [
+    "/DON'S PAW V6.png",
+    "/DON'S PAW V5.png",
+    "/DON'S PAW.png",
+    "/DON'S PAW V7.png",
+    "/DON'S PAW V3.png",
+    "/DON'S PAW V4.png",
+    "/icon.png",
+    "/Screenshot 2024-12-02 174049.png"
+  ];
+
+  // Initialize game
+  const initializeGame = useCallback(() => {
+    // Create two icon.png cards
+    const iconCards = [
+      { id: Math.random(), image: "/icon.png", isFlipped: false, isMatched: false },
+      { id: Math.random(), image: "/icon.png", isFlipped: false, isMatched: false }
+    ];
+    
+    // Get other images excluding icon.png
+    const otherImages = gameImages.filter(img => img !== "/icon.png");
+    const randomImages = otherImages.slice(0, 7); // Get 7 images for 14 cards (7 pairs)
+    
+    const otherCards = randomImages.flatMap(image => [
+      { id: Math.random(), image, isFlipped: false, isMatched: false },
+      { id: Math.random(), image, isFlipped: false, isMatched: false }
+    ]);
+
+    setCards(shuffleArray([...iconCards, ...otherCards]));
+    setIsPlaying(true);
+    setFlippedCards([]);
+    setCanFlip(true);
+  }, []);
+
+  // Shuffle array helper function
+  const shuffleArray = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  // Handle card flip
+  const handleCardFlip = (index: number) => {
+    if (!canFlip || !isPlaying || cards[index].isFlipped || cards[index].isMatched) return;
+
+    const newCards = [...cards];
+    newCards[index].isFlipped = true;
+    setCards(newCards);
+
+    if (flippedCards.length === 0) {
+      setFlippedCards([index]);
+    } else {
+      setCanFlip(false);
+      setFlippedCards([...flippedCards, index]);
+
+      // Check for match
+      const firstCard = cards[flippedCards[0]];
+      const secondCard = cards[index];
+
+      if (firstCard.image === secondCard.image) {
+        // Match found
+        newCards[flippedCards[0]].isMatched = true;
+        newCards[index].isMatched = true;
+        setCards(newCards);
+        setFlippedCards([]);
+        setCanFlip(true);
+
+        // Check if the matched pair is icon.png
+        if (firstCard.image === "/icon.png") {
+          playBarkSound(); // Only play bark sound when icon.png is matched
+          setTimeout(() => {
+            setShowVictoryPopup(true);
+          }, 500);
+        }
+      } else {
+        // No match
+        setTimeout(() => {
+          newCards[flippedCards[0]].isFlipped = false;
+          newCards[index].isFlipped = false;
+          setCards(newCards);
+          setFlippedCards([]);
+          setCanFlip(true);
+        }, 1000);
+      }
+    }
+  };
 
   // Add audio ref
   const barkAudioRef = useRef<HTMLAudioElement>(null);
@@ -93,6 +190,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   const copyToClipboard = useCallback(() => {
     navigator.clipboard.writeText(contractAddress);
     setIsCopied(true);
+    playBarkSound();
     setTimeout(() => setIsCopied(false), 2000);
   }, []);
 
@@ -106,11 +204,11 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       collection: "Don's Doodles"
     },
     {
-      src: "/THE_HILL.png",
-      title: "TOUCHING GRASS",
+      src: "/DON THE SPY V2.gif",
+      title: "DON THE SPY",
       artist: "1OF1NEO",
-      description: "108 × 108 px",
-      minted: "January 15, 2024",
+      description: "124 × 124 px",
+      minted: "February 19, 2025",
       collection: "Don's Doodles"
     },
     {
@@ -149,6 +247,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
   const [showTrddPopup, setShowTrddPopup] = useState(false);
   const [showGalleryPopup, setShowGalleryPopup] = useState(false);
+  const [showVictoryPopup, setShowVictoryPopup] = useState(false);
+  const [isClosingVictory, setIsClosingVictory] = useState(false);
 
   const degenToken: Token = {
     name: 'DON',
@@ -167,6 +267,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   const [isClosingTrdd, setIsClosingTrdd] = useState(false);
   const [isClosingGallery, setIsClosingGallery] = useState(false);
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const [showRulesPopup, setShowRulesPopup] = useState(false);
+  const [isClosingRules, setIsClosingRules] = useState(false);
 
   // Add useEffect for handling clicks outside the modal
   useEffect(() => {
@@ -199,6 +301,37 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     }, 300);
   };
 
+  const handleCloseRules = () => {
+    setIsClosingRules(true);
+    setTimeout(() => {
+      setShowRulesPopup(false);
+      setIsClosingRules(false);
+    }, 300);
+  };
+
+  const [kennelImageIndex, setKennelImageIndex] = useState(0);
+  
+  const kennelImages = [
+    "/DON PFP V2.png",
+    "/SAMPLE V17.png",
+    "/SAMPLE V13.png"
+  ];
+
+  // Initialize game on mount
+  useEffect(() => {
+    initializeGame();
+  }, [initializeGame]);
+
+  // Add close handler for victory popup
+  const handleCloseVictory = () => {
+    setIsClosingVictory(true);
+    setTimeout(() => {
+      setShowVictoryPopup(false);
+      setIsClosingVictory(false);
+      initializeGame(); // Start new game after closing
+    }, 300);
+  };
+
   return (
     <main className={`flex flex-col ${styles.container}`}>
       <audio ref={barkAudioRef} src="/dog-bark-type-04-293288.mp3" preload="auto" />
@@ -214,14 +347,23 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           GALLERY
         </button>
 
+        {/* Buy Button */}
+        <button
+          className="bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-1.5 py-1 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
+          style={{ ...customStyles.pressStart, fontSize: '8px' }}
+          onClick={() => window.open('https://clank.fun/t/0x3801672b93E16A25120995b7201add19dC46fA22', '_blank')}
+        >
+          BUY
+        </button>
+
         {/* Wallet Button */}
         <div className="relative">
-          <Wallet>
-            <WalletDropdown>
+        <Wallet>
+          <WalletDropdown>
               <WalletDropdownBasename />
-              <WalletDropdownDisconnect />
-            </WalletDropdown>
-          </Wallet>
+            <WalletDropdownDisconnect />
+          </WalletDropdown>
+        </Wallet>
         </div>
       </div>
       
@@ -263,15 +405,15 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               </h2>
             </div>
             
-            <div className="p-4">
+            <div className="p-6">
               {/* Disclaimer Image */}
-              <div className="flex justify-center mb-2">
+              <div className="flex justify-center mb-5">
                 <Image 
                   src="/disclaimer.png"
                   alt="Disclaimer illustration"
-                  width={150}
-                  height={150}
-                  className="w-36 h-36"
+                  width={70}
+                  height={70}
+                
                   unoptimized
                 />
               </div>
@@ -308,7 +450,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             {/* Black Header with Title */}
             <div className="w-full bg-black text-white px-6 py-3 flex justify-center items-center rounded-t-3xl">
               <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '14px' }}>
-                Gallery
+                Don's Sketch Book
               </h2>
             </div>
             
@@ -348,33 +490,61 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
       <div className="max-w-[324px] mx-auto space-y-6 mt-16">
         {/* Contract Address Card */}
-        <Card className="bg-white text-black p-4 pb-16 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+        <Card className="bg-white text-black p-12 pb-4 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="flex flex-col">
             {/* Title Section */}
             <div className="text-center mb-4">
               {/* DON Character Image */}
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center mb-8">
                 <Image
-                  src="/DON FULL BODY v2.gif"
+                  src="/don-painter.gif"
                   alt="DON character with purple top hat and headphones"
-                  width={120}
-                  height={120}
+                  width={220}
+                  height={220}
                   className="object-contain"
                   unoptimized
                 />
               </div>
-              <h1 className="text-3xl font-bold mb-2" style={customStyles.pressStart}>DON DA DEGEN DOG</h1>
-              <p className="text-lg mb-4" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
+              <h1 className="text-5xl font-bold mb-2" style={customStyles.pressStart}>DON</h1>
+              <p className="text-base mb-3" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
+              
+              {/* Contract Address */}
+              <div className="flex items-center justify-center mb-4">
+                <div className={`bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-1 py-0.5 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] relative flex items-center gap-1 max-w-[280px] ${isCopied ? 'animate-wiggle' : ''}`}>
+                  <style jsx>{`
+                    @keyframes wiggle {
+                      0%, 100% { transform: rotate(0deg); }
+                      25% { transform: rotate(-3deg); }
+                      75% { transform: rotate(3deg); }
+                    }
+                    .animate-wiggle {
+                      animation: wiggle 0.3s ease-in-out;
+                    }
+                  `}</style>
+                  <p className="font-mono" style={{ ...customStyles.pressStart, fontSize: '6px' }}>0x3801672b93E16A25120995b7201add19dC46fA22</p>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("0x3801672b93E16A25120995b7201add19dC46fA22");
+                      setIsCopied(true);
+                      playBarkSound();
+                      setTimeout(() => setIsCopied(false), 2000);
+                    }}
+                    className="hover:opacity-80"
+                  >
+                    {isCopied ? <Check size={12} /> : <Copy size={12} />}
+                  </button>
+                </div>
+              </div>
               
               {/* Social Icons */}
-              <div className="flex justify-center gap-4 mb-2">
+              <div className="flex justify-center gap-3">
                 <Image 
                   src="/icons8-twitter-bird-32.png"
                   alt="Twitter Bird Logo"
                   width={24}
                   height={24}
                   className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
+                  onClick={() => window.open('https://twitter.com/dononbase', '_blank')}
                   unoptimized
                 />
                 <Image 
@@ -383,7 +553,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   width={24}
                   height={24}
                   className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://t.me/dondadegendog', '_blank')}
+                  onClick={() => window.open('https://t.me/dononbase', '_blank')}
                   unoptimized
                 />
                 <Image 
@@ -392,37 +562,49 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   width={24}
                   height={24}
                   className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://instagram.com/dondadegendog', '_blank')}
+                  onClick={() => window.open('https://instagram.com/dononbase', '_blank')}
+                  unoptimized
+                />
+                <Image 
+                  src="/icons8-tiktok-32.png"
+                  alt="TikTok Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://tiktok.com/@dononbase', '_blank')}
                   unoptimized
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between mt-0">
-              <div 
-                className="text-sm break-all pr-4 cursor-pointer hover:text-gray-600 transition-colors"
-                style={customStyles.bebasNeueRegular}
-                onClick={copyToClipboard}
-                role="button"
-                aria-label="Click to copy contract address"
-              >
-                {contractAddress}
+          </div>
+        </Card>
+
+        {/* Origin Card */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Origin</h2>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 hover:bg-gray-100"
-                onClick={copyToClipboard}
-              >
-                {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                <span className="sr-only">
-                  {isCopied ? "Address copied" : "Copy contract address"}
-                </span>
-              </Button>
+          <div className="p-9">
+            {/* Origin Image */}
+            <div className="flex justify-center mb-7">
+              <Image 
+                src="/DON-FULL-BODY-v2.gif"
+                alt="Don character illustration"
+                width={100}
+                height={100}
+       
+                unoptimized
+              />
             </div>
 
-            {/* Coinbase Buy Component */}
-            <div className="mt-4">
-              <Buy toToken={degenToken} />
+            {/* Origin Story */}
+            <div className="space-y-4">
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              Don The Dog is a daring and spirited art lead meme coin that merges art, memes, culture, and the relentless energy of a true degen. 
+              </p>
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              Don's here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.
+              </p>
             </div>
           </div>
         </Card>
@@ -432,15 +614,15 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>How to Buy</h2>
           </div>
-          <div className="p-8 space-y-6">
+          <div className="p-9 space-y-6">
             {/* Wallet Image */}
             <div className="flex justify-center mb-4">
               <Image 
-                src="/DON'S WALLET V2.png"
+                src="/DONS_WALLET_V2.png"
                 alt="Wallet illustration"
-                width={128}
-                height={128}
-                className="w-32 h-32"
+                width={150}
+                height={150}
+             
                 unoptimized
               />
             </div>
@@ -473,7 +655,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
             {/* Step 3 */}
             <div className="flex gap-4 items-start">
-              <div className="bg-red-500 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+              <div className="bg-green-500 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
                 03
               </div>
               <div>
@@ -499,79 +681,245 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
         </Card>
 
-        {/* Tokenomics Card */}
+        {/* Duplicate Origin Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+          <div className="w-full bg-black text-white px-9 py-6 flex justify-center items-center">
             <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Tokenomics</h2>
           </div>
-          <div className="p-5 space-y-6">
-            {/* Tokenomics Image */}
-            <div className="flex justify-center mb-4">
+          <div className="p-11">
+            {/* Origin Image */}
+            <div className="flex justify-center mb-8">
               <Image 
-                src="/DON LAPTOP.png"
-                alt="Tokenomics illustration"
-                width={200}
-                height={200}
-                className="w-48 h-48"
+                src="/loading-clanker.gif"
+                alt="Don character illustration"
+                width={150}
+                height={150}
+             
                 unoptimized
               />
             </div>
 
-            {/* Step 1 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#FF990A] text-white font-bold rounded-full p-2 w-5 h-5 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart, fontSize: '10px' }}>
-                
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Fair Launch</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Launched by Clanker bot on Farcaster with a simple cast mention.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#2A69F7] text-white font-bold rounded-full p-2 w-5 h-5 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart, fontSize: '10px' }}>
-                
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Token Supply</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Started with token supply only, no initial ETH liquidity.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-red-500 text-white font-bold rounded-full p-2 w-5 h-5 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart, fontSize: '10px' }}>
-                
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Liquidity</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Uses one-sided liquidity on Uniswap V3 for trading.
-                </p>
-              </div>
+            {/* Origin Story */}
+            <div className="space-y-4">
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              $DON is a token deployed by clanker, an autonomous bot that allows farcaster users to 'prompt' a base token directly in the feed, making launches very simple and fair.
+              </p>
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              clanker uses one-sided liquidity on uniswap v3, meaning the pool starts with only the token supply, no eth.
+              </p>
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              Circulating supply is 100,000,000,000 $DON.
+              </p>
             </div>
           </div>
         </Card>
 
-        {/* Empty Container */}
+        {/* Memory Game Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Coming Soon</h2>
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Find Don Game</h2>
           </div>
-          <div className="p-8 space-y-6">
-            {/* Content will be added later */}
+          <div className="p-8 pt-8 pb-16 flex flex-col h-[400px]">
+            {/* Icon Image */}
+            <div className="flex justify-center mb-6">
+              <Image 
+                src="/icon.png"
+                alt="Game Icon"
+                width={48}
+                height={48}
+       
+                unoptimized
+              />
+            </div>
+
+            {/* Game Grid */}
+            <div className="grid grid-cols-4 gap-2 max-w-[280px] mx-auto">
+              {cards.map((card, index) => (
+                <div
+                  key={card.id}
+                  className={`aspect-square bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-300 flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] overflow-hidden ${
+                    !isPlaying ? 'pointer-events-none' : ''
+                  }`}
+                  style={{ height: '50px' }}
+                  onClick={() => handleCardFlip(index)}
+                >
+                  {(card.isFlipped || card.isMatched) ? (
+                    <Image
+                      src={card.image}
+                      alt="Card"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <span style={{ ...customStyles.pressStart, fontSize: '20px' }}>?</span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Game Controls */}
+            <div className="flex justify-center items-center gap-4 mt-auto pt-8">
+              <button
+                className="bg-red-500 text-white px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] hover:bg-red-600 transition-colors duration-300"
+                style={{ ...customStyles.pressStart, fontSize: '8px' }}
+                onClick={() => setShowRulesPopup(true)}
+              >
+                RULES
+              </button>
+              <button
+                className="bg-green-500 text-white px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] hover:bg-green-600 transition-colors duration-300"
+                style={{ ...customStyles.pressStart, fontSize: '8px' }}
+                onClick={initializeGame}
+              >
+                {isPlaying ? 'RESTART' : 'START'}
+              </button>
+            </div>
+          </div>
+        </Card>
+
+        {/* Rules Popup */}
+        {showRulesPopup && (
+          <div 
+            className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 transition-opacity duration-300"
+            onClick={handleCloseRules}
+          >
+            <div 
+              className={`bg-white rounded-3xl p-0 max-w-[300px] w-full mx-4 relative border-2 border-[#1E293B] transition-all duration-300 ${
+                isClosingRules ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              }`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-3 right-3 text-white hover:opacity-70 z-10"
+                onClick={handleCloseRules}
+                style={{ ...customStyles.pressStart, fontSize: '16px' }}
+              >
+                ×
+              </button>
+
+              {/* Black Header with Title */}
+              <div className="w-full bg-black text-white px-6 py-4 flex justify-center items-center rounded-t-3xl">
+                <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>
+                Rules
+                </h2>
+              </div>
+              
+              <div className="p-7">
+                {/* Rules Image */}
+                <div className="flex justify-center mb-6">
+                        <Image 
+                    src="/icon.png"
+                    alt="Game Rules illustration"
+                    width={65}
+                    height={65}
+                
+                          unoptimized
+                        />
+                      </div>
+
+                {/* Rules Steps */}
+                <div className="space-y-4">
+                  {/* Step 1 */}
+                  <div className="flex gap-4 items-start">
+                    <div className="bg-[#2A69F7] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                      01
+                    </div>
+                    <div>
+                      <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                        Click on any ? to flip it and reveal the card
+                        </p>
+                      </div>
+                    </div>
+
+                  {/* Step 2 */}
+                  <div className="flex gap-4 items-start">
+                    <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                      02
+                    </div>
+                    <div>
+                        <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                      find the matching pair of Don's head to win the game
+                        </p>
+                      </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="flex gap-4 items-start">
+                    <div className="bg-green-500 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
+                      03
+                    </div>
+                    <div>
+                      <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                        have fun
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Meet The Artist Card */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Meet The Artist</h2>
+          </div>
+          <div className="p-8">
+            {/* Artist Image */}
+            <div className="flex justify-center mb-8">
+              <Image 
+                src="/1OF1NEO_DON_PAINTER.gif"
+                alt="Artist illustration"
+                width={250}
+                height={250}
+          
+                unoptimized
+              />
+            </div>
+
+            {/* Artist Story */}
+            <div className="space-y-4">
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              1OF1NEO is a multi-disciplinary artist creating at the intersection of art, music, design, technology, and digtal expression.
+              </p>
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              Building onchain since 2021, NEO explores new frontiers of creativity through art, music, storytelling & community.
+              </p>
+
+              {/* Social Icons */}
+              <div className="flex justify-center gap-3 mt-6">
+                <Image 
+                  src="/icons8-twitter-bird-32.png"
+                  alt="Twitter Bird Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://twitter.com/1of1neo', '_blank')}
+                  unoptimized
+                />
+                <Image 
+                  src="/icons8-instagram-32.png"
+                  alt="Instagram Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://www.instagram.com/yourjiggylord/', '_blank')}
+                  unoptimized
+                />
+              </div>
+            </div>
           </div>
         </Card>
 
       </div>
 
       {/* Footer */}
-      <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>© 2024 By Don Da Degen Dog. All rights reserved.</p>
+      <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>© 2025 By Don The Dog. All rights reserved.</p>
+      <p className="text-center text-white text-xs mt-1" style={customStyles.bebasNeueRegular}>Version 1.0.0</p>
       
       <AudioPlayer 
         audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" 
@@ -583,6 +931,55 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         onClose={() => setSelectedImage(null)}
         image={selectedImage || galleryImages[0]}
       />
+
+      {/* Victory Popup */}
+      {showVictoryPopup && (
+        <div 
+          className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 transition-opacity duration-300"
+          onClick={handleCloseVictory}
+        >
+          <div 
+            className={`bg-white rounded-3xl p-0 max-w-[300px] w-full mx-4 relative border-2 border-[#1E293B] transition-all duration-300 ${
+              isClosingVictory ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-3 right-3 text-white hover:opacity-70 z-10"
+              onClick={handleCloseVictory}
+              style={{ ...customStyles.pressStart, fontSize: '16px' }}
+            >
+              ×
+            </button>
+
+            {/* Black Header with Title */}
+            <div className="w-full bg-black text-white px-6 py-4 flex justify-center items-center rounded-t-3xl">
+              <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>
+                Winner!
+              </h2>
+            </div>
+            
+            <div className="p-6">
+              {/* Victory Image */}
+              <div className="flex justify-center mb-5">
+                <Image 
+                  src="/icon.png"
+                  alt="Victory illustration"
+                  width={80}
+                  height={80}
+                
+                  unoptimized
+                />
+              </div>
+
+              {/* Victory Text */}
+              <p className="text-center text-xs leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                Congratulations! You've found Don!
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
