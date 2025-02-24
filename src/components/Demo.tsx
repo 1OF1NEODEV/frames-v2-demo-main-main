@@ -48,9 +48,8 @@ const customStyles = {
     paddingBottom: '2rem',
     backgroundImage: 'url("/Backyard.png")',
     margin: '0 auto',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
-    backgroundPosition: 'center',
+    backgroundRepeat: 'repeat',
+    backgroundSize: '300px 300px',
     width: '100%',
     maxWidth: '100vw',
     height: '100%',
@@ -201,7 +200,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "68 × 70 px",
       minted: "???",
-      collection: "Don&apos;s Doodles"
+      collection: "Don's Doodles"
     },
     {
       src: "/DON THE SPY V2.gif",
@@ -209,7 +208,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "124 × 124 px",
       minted: "February 19, 2025",
-      collection: "Don&apos;s Doodles"
+      collection: "Don's Doodles"
     },
     {
       src: "/DON_KING.png",
@@ -217,7 +216,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "68 × 68 px",
       minted: "January 14, 2024",
-      collection: "Don&apos;s Doodles"
+      collection: "Don's Doodles"
     },
     {
       src: "/RODEO_DON.gif",
@@ -225,7 +224,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "84 × 62 px",
       minted: "January 12, 2024",
-      collection: "Don&apos;s Doodles"
+      collection: "Don's Doodles"
     },
     {
       src: "/DICKBUTT_DON.png",
@@ -233,7 +232,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "48 × 58 px",
       minted: "January 10, 2024",
-      collection: "Don&apos;s Doodles"
+      collection: "Don's Doodles"
     },
     {
       src: "/SKIMASK_DON.gif",
@@ -241,7 +240,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "40 × 48 px",
       minted: "December 13, 2024",
-      collection: "Don&apos;s Doodles"
+      collection: "Don's Doodles"
     }
   ];
 
@@ -521,7 +520,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                       animation: wiggle 0.3s ease-in-out;
                     }
                   `}</style>
-                  <p className="font-mono" style={{ ...customStyles.pressStart, fontSize: '6px' }}>0x3801672b93E16A25120995b7201add19dC46fA22</p>
+                  <p className="font-mono" style={{ ...customStyles.pressStart, fontSize: '5px' }}>0x3801672b93E16A25120995b7201add19dC46fA22</p>
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText("0x3801672b93E16A25120995b7201add19dC46fA22");
