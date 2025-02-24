@@ -110,7 +110,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     setIsPlaying(true);
     setFlippedCards([]);
     setCanFlip(true);
-  }, []);
+  }, [gameImages]);
 
   // Shuffle array helper function
   const shuffleArray = (array: any[]) => {
@@ -201,7 +201,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "68 × 70 px",
       minted: "???",
-      collection: "Don's Doodles"
+      collection: "Don&apos;s Doodles"
     },
     {
       src: "/DON THE SPY V2.gif",
@@ -209,7 +209,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "124 × 124 px",
       minted: "February 19, 2025",
-      collection: "Don's Doodles"
+      collection: "Don&apos;s Doodles"
     },
     {
       src: "/DON_KING.png",
@@ -217,7 +217,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "68 × 68 px",
       minted: "January 14, 2024",
-      collection: "Don's Doodles"
+      collection: "Don&apos;s Doodles"
     },
     {
       src: "/RODEO_DON.gif",
@@ -225,7 +225,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "84 × 62 px",
       minted: "January 12, 2024",
-      collection: "Don's Doodles"
+      collection: "Don&apos;s Doodles"
     },
     {
       src: "/DICKBUTT_DON.png",
@@ -233,7 +233,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "48 × 58 px",
       minted: "January 10, 2024",
-      collection: "Don's Doodles"
+      collection: "Don&apos;s Doodles"
     },
     {
       src: "/SKIMASK_DON.gif",
@@ -241,7 +241,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
       artist: "1OF1NEO",
       description: "40 × 48 px",
       minted: "December 13, 2024",
-      collection: "Don's Doodles"
+      collection: "Don&apos;s Doodles"
     }
   ];
 
@@ -450,7 +450,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             {/* Black Header with Title */}
             <div className="w-full bg-black text-white px-6 py-3 flex justify-center items-center rounded-t-3xl">
               <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '14px' }}>
-                Don's Sketch Book
+                Don&apos;s Sketch Book
               </h2>
             </div>
             
@@ -603,7 +603,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
               Don The Dog is a daring and spirited art lead meme coin that merges art, memes, culture, and the relentless energy of a true degen. 
               </p>
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              Don's here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.
+              Don&apos;s here to spark creativity and fun while carving its own pawprint in the world of decentralized finance.
               </p>
             </div>
           </div>
@@ -702,7 +702,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
             {/* Origin Story */}
             <div className="space-y-4">
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              $DON is a token deployed by clanker, an autonomous bot that allows farcaster users to 'prompt' a base token directly in the feed, making launches very simple and fair.
+              $DON is a token deployed by clanker, an autonomous bot that allows farcaster users to &apos;prompt&apos; a base token directly in the feed, making launches very simple and fair.
               </p>
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
               clanker uses one-sided liquidity on uniswap v3, meaning the pool starts with only the token supply, no eth.
@@ -840,7 +840,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                     </div>
                     <div>
                         <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                      find the matching pair of Don's head to win the game
+                      find the matching pair of Don&apos;s head to win the game
                         </p>
                       </div>
                   </div>
