@@ -974,7 +974,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
               {/* Victory Text */}
               <p className="text-center text-xs leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Congratulations! You've found Don!
+                Congratulations! You&apos;ve found Don!
               </p>
             </div>
           </div>
