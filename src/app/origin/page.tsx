@@ -25,7 +25,7 @@ export default function OriginPage() {
                 ORIGIN
               </h1>
               <p className="text-black mb-4" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>
-                Don Da Degen Dog is a pixel art character created by the talented artist known as "1OF1NEO". 
+                Don Da Degen Dog is a pixel art character created by the talented artist known as &quot;1OF1NEO&quot;. 
                 The character represents the spirit of decentralized finance (DeFi) and the Base blockchain community.
               </p>
               <p className="text-black" style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '14px' }}>

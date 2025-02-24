@@ -77,20 +77,20 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [canFlip, setCanFlip] = useState(true);
 
-  // Memory Game Images
-  const gameImages = [
-    "/DON'S PAW V6.png",
-    "/DON'S PAW V5.png",
-    "/DON'S PAW.png",
-    "/DON'S PAW V7.png",
-    "/DON'S PAW V3.png",
-    "/DON'S PAW V4.png",
-    "/icon.png",
-    "/Screenshot 2024-12-02 174049.png"
-  ];
-
   // Initialize game
   const initializeGame = useCallback(() => {
+    // Memory Game Images
+    const gameImages = [
+      "/DON'S PAW V6.png",
+      "/DON'S PAW V5.png",
+      "/DON'S PAW.png",
+      "/DON'S PAW V7.png",
+      "/DON'S PAW V3.png",
+      "/DON'S PAW V4.png",
+      "/icon.png",
+      "/Screenshot 2024-12-02 174049.png"
+    ];
+
     // Create two icon.png cards
     const iconCards = [
       { id: Math.random(), image: "/icon.png", isFlipped: false, isMatched: false },
@@ -110,7 +110,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     setIsPlaying(true);
     setFlippedCards([]);
     setCanFlip(true);
-  }, [gameImages]);
+  }, []);
 
   // Shuffle array helper function
   const shuffleArray = (array: any[]) => {
