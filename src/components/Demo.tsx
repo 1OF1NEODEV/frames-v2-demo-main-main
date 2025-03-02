@@ -21,6 +21,8 @@ import sdk, {
   FrameNotificationDetails,
   SignIn as SignInCore,
   FrameContext,
+  AddFrameResult,
+  AddFrameRejectedReason
 } from "@farcaster/frame-sdk";
 import {
   useAccount,
@@ -228,28 +230,33 @@ store.subscribe(providerDetails => {
   const addFrame = useCallback(async () => {
     try {
       setNotificationDetails(null);
-
       const result = await sdk.actions.addFrame();
 
-      if ('notificationDetails' in result && result.notificationDetails) {
-        setNotificationDetails(result.notificationDetails);
-        setAddFrameResult(
-          `Added, got notificaton token ${result.notificationDetails.token} and url ${result.notificationDetails.url}`
-        );
-      } else {
-        setAddFrameResult("Added, got no notification details");
+      if ('added' in result) {
+        if (result.added) {
+          if (result.notificationDetails) {
+            setNotificationDetails(result.notificationDetails);
+            setAddFrameResult(
+              `Frame added successfully with notification token ${result.notificationDetails.token}`
+            );
+          } else {
+            setAddFrameResult("Frame added successfully without notifications");
+          }
+        } else {
+          setAddFrameResult(`Frame not added: ${result.reason}`);
+        }
       }
     } catch (error) {
       if (error instanceof Error) {
         if (error.name === 'RejectedByUser') {
-          setAddFrameResult(`Not added: ${error.message}`);
+          setAddFrameResult('Frame addition rejected by user');
         } else if (error.name === 'InvalidDomainManifest') {
-          setAddFrameResult(`Not added: ${error.message}`);
+          setAddFrameResult('Invalid domain manifest - please check frame configuration');
         } else {
-          setAddFrameResult(`Error: ${error.message}`);
+          setAddFrameResult(`Error adding frame: ${error.message}`);
         }
       } else {
-        setAddFrameResult(`Unknown error occurred`);
+        setAddFrameResult('Unknown error occurred while adding frame');
       }
     }
   }, []);
