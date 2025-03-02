@@ -1,34 +1,47 @@
 "use client";
-import { useEffect, useCallback, useState, useRef } from "react";
-import { signIn, signOut, getCsrfToken } from "next-auth/react";
-import { useSession } from "next-auth/react";
+
+
+
 import Link from "next/link";
 import Image from "next/image";
 import { Check, Copy } from "lucide-react";
-import sdk, { type FrameContext } from '@farcaster/frame-sdk';
-import { Button } from "~/components/ui/Button";
+
+
 import { Card } from "~/components/ui/card";
-import { truncateAddress } from "~/lib/truncateAddress";
+
 import AudioPlayer from "~/components/AudioPlayer";
 import Lightbox from "~/components/Lightbox";
 import styles from '~/styles/Demo.module.css';
-import { Buy } from '@coinbase/onchainkit/buy';
-import type { Token } from '@coinbase/onchainkit/token';
-import '@coinbase/onchainkit/styles.css';
-import { 
-  Wallet, 
-  WalletDropdown, 
-  WalletDropdownBasename,
-  WalletDropdownDisconnect
-} from '@coinbase/onchainkit/wallet';
+
+import { useEffect, useCallback, useState, useMemo, useRef } from "react";
+
+import { signIn, signOut, getCsrfToken } from "next-auth/react";
+import sdk, {
+    AddFrame,
+  FrameNotificationDetails,
+  SignIn as SignInCore,
+  type Context,
+} from "@farcaster/frame-sdk";
 import {
-  Address,
-  Avatar,
-  Name,
-  Identity,
-  EthBalance,
-} from '@coinbase/onchainkit/identity';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+  useAccount,
+  useSendTransaction,
+  useSignMessage,
+  useSignTypedData,
+  useWaitForTransactionReceipt,
+  useDisconnect,
+  useConnect,
+  useSwitchChain,
+  useChainId,
+} from "wagmi";
+
+import { config } from "~/components/providers/WagmiProvider";
+import { Button } from "~/components/ui/Button";
+import { truncateAddress } from "~/lib/truncateAddress";
+import { base, optimism, degen, mainnet } from "wagmi/chains";
+import { BaseError, UserRejectedRequestError } from "viem";
+import { useSession } from "next-auth/react"
+import { createStore } from 'mipd'
+
 
 // Constants
 const contractAddress = "0x2427e231B401E012edacD1c4dD700ea2D4376eD0";
@@ -48,8 +61,9 @@ const customStyles = {
     paddingBottom: '2rem',
     backgroundImage: 'url("/Backyard.png")',
     margin: '0 auto',
-    backgroundRepeat: 'repeat',
-    backgroundSize: '300px 300px',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%',
+    backgroundPosition: 'center',
     width: '100%',
     maxWidth: '100vw',
     height: '100%',
@@ -69,6 +83,212 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     minted: string;
     collection: string;
   }>(null);
+
+ const [context, setContext] = useState<Context.FrameContext>();
+  const [isContextOpen, setIsContextOpen] = useState(false);
+  const [txHash, setTxHash] = useState<string | null>(null);
+
+  const [added, setAdded] = useState(false);
+  const [notificationDetails, setNotificationDetails] =
+    useState<FrameNotificationDetails | null>(null);
+
+  const [lastEvent, setLastEvent] = useState("");
+
+  const [addFrameResult, setAddFrameResult] = useState("");
+  const [sendNotificationResult, setSendNotificationResult] = useState("");
+
+  useEffect(() => {
+    setNotificationDetails(context?.client.notificationDetails ?? null);
+  }, [context]);
+
+  const { address, isConnected } = useAccount();
+  const chainId = useChainId();
+
+  const {
+    sendTransaction,
+    error: sendTxError,
+    isError: isSendTxError,
+    isPending: isSendTxPending,
+  } = useSendTransaction();
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash: txHash as `0x${string}`,
+    });
+
+  const {
+    signTypedData,
+    error: signTypedError,
+    isError: isSignTypedError,
+    isPending: isSignTypedPending,
+  } = useSignTypedData();
+
+  const { disconnect } = useDisconnect();
+  const { connect } = useConnect();
+
+  const {
+    switchChain,
+    error: switchChainError,
+    isError: isSwitchChainError,
+    isPending: isSwitchChainPending,
+  } = useSwitchChain();
+
+  const nextChain = useMemo(() => {
+    if (chainId === base.id) {
+      return optimism;
+    } else if (chainId === optimism.id) {
+      return degen;
+    } else if (chainId === degen.id) {
+      return mainnet;
+    } else {
+      return base;
+    }
+  }, [chainId]);
+
+  const handleSwitchChain = useCallback(() => {
+    switchChain({ chainId: nextChain.id });
+  }, [switchChain, chainId]);
+
+  useEffect(() => {
+    const load = async () => {
+      const context = await sdk.context;
+      setContext(context);
+      setAdded(context.client.added);
+
+      sdk.on("frameAdded", ({ notificationDetails }) => {
+        setLastEvent(
+          `frameAdded${!!notificationDetails ? ", notifications enabled" : ""}`
+        );
+
+        setAdded(true);
+        if (notificationDetails) {
+          setNotificationDetails(notificationDetails);
+        }
+      });
+
+      sdk.on("frameAddRejected", ({ reason }) => {
+        setLastEvent(`frameAddRejected, reason ${reason}`);
+      });
+
+      sdk.on("frameRemoved", () => {
+        setLastEvent("frameRemoved");
+        setAdded(false);
+        setNotificationDetails(null);
+      });
+
+      sdk.on("notificationsEnabled", ({ notificationDetails }) => {
+        setLastEvent("notificationsEnabled");
+        setNotificationDetails(notificationDetails);
+      });
+      sdk.on("notificationsDisabled", () => {
+        setLastEvent("notificationsDisabled");
+        setNotificationDetails(null);
+      });
+
+      sdk.on("primaryButtonClicked", () => {
+        console.log("primaryButtonClicked");
+      });
+
+      console.log("Calling ready");
+      sdk.actions.ready({});
+
+// Set up a MIPD Store, and request Providers.
+const store = createStore()
+
+// Subscribe to the MIPD Store.
+store.subscribe(providerDetails => {
+  console.log("PROVIDER DETAILS", providerDetails)
+  // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
+})
+
+    };
+    if (sdk && !isSDKLoaded) {
+      console.log("Calling load");
+      setIsSDKLoaded(true);
+      load();
+      return () => {
+        sdk.removeAllListeners();
+      };
+    }
+  }, [isSDKLoaded]);
+
+  const openUrl = useCallback(() => {
+    sdk.actions.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+  }, []);
+
+  const openWarpcastUrl = useCallback(() => {
+    sdk.actions.openUrl("https://warpcast.com/~/compose");
+  }, []);
+
+  const close = useCallback(() => {
+    sdk.actions.close();
+  }, []);
+
+  const addFrame = useCallback(async () => {
+    try {
+      setNotificationDetails(null);
+
+      const result = await sdk.actions.addFrame();
+
+      if ('notificationDetails' in result && result.notificationDetails) {
+        setNotificationDetails(result.notificationDetails);
+        setAddFrameResult(
+          `Added, got notificaton token ${result.notificationDetails.token} and url ${result.notificationDetails.url}`
+        );
+      } else {
+        setAddFrameResult("Added, got no notification details");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.name === 'RejectedByUser') {
+          setAddFrameResult(`Not added: ${error.message}`);
+        } else if (error.name === 'InvalidDomainManifest') {
+          setAddFrameResult(`Not added: ${error.message}`);
+        } else {
+          setAddFrameResult(`Error: ${error.message}`);
+        }
+      } else {
+        setAddFrameResult(`Unknown error occurred`);
+      }
+    }
+  }, []);
+
+  const sendNotification = useCallback(async () => {
+    setSendNotificationResult("");
+    if (!notificationDetails || !context) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/send-notification", {
+        method: "POST",
+        mode: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fid: context.user.fid,
+          notificationDetails,
+        }),
+      });
+
+      if (response.status === 200) {
+        setSendNotificationResult("Success");
+        return;
+      } else if (response.status === 429) {
+        setSendNotificationResult("Rate limited");
+        return;
+      }
+
+      const data = await response.text();
+      setSendNotificationResult(`Error: ${data}`);
+    } catch (error) {
+      setSendNotificationResult(`Error: ${error}`);
+    }
+  }, [context, notificationDetails]);
+
+const toggleContext = useCallback(() => {
+    setIsContextOpen((prev) => !prev);
+  }, []);
+
 
   // Memory Game State
   const [cards, setCards] = useState<Array<{ id: number; image: string; isFlipped: boolean; isMatched: boolean }>>([]);
@@ -249,18 +469,10 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
   const [showVictoryPopup, setShowVictoryPopup] = useState(false);
   const [isClosingVictory, setIsClosingVictory] = useState(false);
 
-  const degenToken: Token = {
-    name: 'DON',
-    address: '0x2427e231B401E012edacD1c4dD700ea2D4376eD0',
-    symbol: 'DON',
-    decimals: 18,
-    image: 'icon.png',
-    chainId: 8453,
-  };
+ 
 
-  const { address, isConnected } = useAccount();
-  const { connectors, connect } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { connectors } = useConnect();
+
 
   // Add new state variables after other state declarations
   const [isClosingTrdd, setIsClosingTrdd] = useState(false);
@@ -354,18 +566,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
         >
           BUY
         </button>
-
-        {/* Wallet Button */}
-        <div className="relative">
-        <Wallet>
-          <WalletDropdown>
-              <WalletDropdownBasename />
-            <WalletDropdownDisconnect />
-          </WalletDropdown>
-        </Wallet>
-        </div>
       </div>
-      
+
       {/* DYOR Button (Bottom Right) */}
       <div className="fixed bottom-4 right-4 z-50">
         <button
@@ -504,8 +706,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   unoptimized
                 />
               </div>
-              <h1 className="text-5xl font-bold mb-2" style={customStyles.pressStart}>DON</h1>
-              <p className="text-base mb-3" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
+              <h1 className="text-6xl font-bold mb-2" style={customStyles.pressStart}>DON</h1>
+              <p className="text-base mb-2" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
               
               {/* Contract Address */}
               <div className="flex items-center justify-center mb-4">
@@ -608,6 +810,39 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
           </div>
         </Card>
 
+        {/* Tokenomics Card (Moved above How to Buy) */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-9 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Tokenomics</h2>
+          </div>
+          <div className="p-11">
+            {/* Origin Image */}
+            <div className="flex justify-center mb-8">
+              <Image 
+                src="/loading-clanker.gif"
+                alt="Don character illustration"
+                width={150}
+                height={150}
+             
+                unoptimized
+              />
+            </div>
+
+            {/* Origin Story */}
+            <div className="space-y-4">
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              $DON is a token deployed by clanker, an autonomous bot that allows farcaster users to &apos;prompt&apos; a base token directly in the feed, making launches very simple and fair.
+              </p>
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              clanker uses one-sided liquidity on uniswap v3, meaning the pool starts with only the token supply, no eth.
+              </p>
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+              Circulating supply is 100,000,000,000 $DON.
+              </p>
+            </div>
+          </div>
+        </Card>
+
         {/* How to Buy Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="how-to-buy">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
@@ -676,39 +911,6 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   Paste the $DON token address, select DON, and confirm. Sign the wallet prompt to complete swap.
                 </p>
               </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Duplicate Origin Card */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-          <div className="w-full bg-black text-white px-9 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Tokenomics</h2>
-          </div>
-          <div className="p-11">
-            {/* Origin Image */}
-            <div className="flex justify-center mb-8">
-              <Image 
-                src="/loading-clanker.gif"
-                alt="Don character illustration"
-                width={150}
-                height={150}
-             
-                unoptimized
-              />
-            </div>
-
-            {/* Origin Story */}
-            <div className="space-y-4">
-              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              $DON is a token deployed by clanker, an autonomous bot that allows farcaster users to &apos;prompt&apos; a base token directly in the feed, making launches very simple and fair.
-              </p>
-              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              clanker uses one-sided liquidity on uniswap v3, meaning the pool starts with only the token supply, no eth.
-              </p>
-              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-              Circulating supply is 100,000,000,000 $DON.
-              </p>
             </div>
           </div>
         </Card>
@@ -909,6 +1111,53 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
                   onClick={() => window.open('https://www.instagram.com/yourjiggylord/', '_blank')}
                   unoptimized
                 />
+                <Image 
+                  src="/icons8-discord-new-32.png"
+                  alt="Discord Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://discord.gg/haGDJ2UWPG', '_blank')}
+                  unoptimized
+                />
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* New Container with DON PHONE.gif */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Warpcast</h2>
+          </div>
+          <div className="p-6">
+            {/* DON PHONE Image */}
+            <div className="flex justify-center mb-2">
+              <Image 
+                src="/DON PHONE V2.png"
+                alt="Don with phone"
+                width={400}
+                height={400}
+                unoptimized
+              />
+            </div>
+
+            {/* Description Text - Moved higher up with reduced margin */}
+            <div className="space-y-5">
+              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                Join our community on warpcast today and stay connected to the latest Don news and community updates.
+              </p>
+              
+              {/* Buttons - Reduced top margin */}
+              <div className="flex justify-center gap-4 mt-3">
+                
+                <button
+                  className="bg-[#2A69F7] text-white px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] hover:bg-purple-600 transition-colors duration-300"
+                  style={{ ...customStyles.pressStart, fontSize: '8px' }}
+                  onClick={() => window.open('https://warpcast.com/~/channel/don', '_blank')}
+                >
+                  JOIN CHANNEL
+                </button>
               </div>
             </div>
           </div>
