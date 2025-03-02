@@ -20,7 +20,7 @@ import sdk, {
     AddFrame,
   FrameNotificationDetails,
   SignIn as SignInCore,
-  type Context,
+  FrameContext,
 } from "@farcaster/frame-sdk";
 import {
   useAccount,
@@ -72,6 +72,7 @@ const customStyles = {
 };
 
 export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): JSX.Element {
+  
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [isKennelImageFlipped, setIsKennelImageFlipped] = useState(false);
@@ -84,7 +85,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     collection: string;
   }>(null);
 
- const [context, setContext] = useState<Context.FrameContext>();
+ const [context, setContext] = useState<FrameContext>();
   const [isContextOpen, setIsContextOpen] = useState(false);
   const [txHash, setTxHash] = useState<string | null>(null);
 
