@@ -5,9 +5,9 @@ export async function GET() {
     accountAssociation: {
       header:
         "eyJmaWQiOjIzNTAyNSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweEQwODA0NTdiRjIwMUJiQjcxNDUwNTU4OEQ4ODI1ZTJDZjRhYjgwNDAifQ",
-      payload: "eyJkb21haW4iOiJmcmFtZXMtdjItZGVtby1tYWluLW1haW4udmVyY2VsLmFwcCJ9",
+      payload: "eyJkb21haWeyJkb21haW4iOiJkb250aGVkb2cudmVyY2VsLmFwcCJ9",
       signature:
-        "MHhjZjYyYjczYTFlZjA4NTBmNDU0MTk3ODAzMTliMzFkZjViYWY4YzY1MjkzYTcxNzA1NmNiYzY2NWRhMTlhN2EyNDYxZjY0ODExMDBkNWNmZDMzNTUxYzkzZTEyZDFmMWE1NGMyMDYyNGNlODE0NDgzMTgzNjRlY2Y3Y2EzMGQ1ZDFj",
+        "MHg2NGEwNjIxNmVkYmYzMjdmYjAyMmFjZDhiYjA0Yjg2ZTI0NmJjOTY4NzQxZjYyYzgwNTQ3N2YxNmViZmE3M2E4N2I2MzJmOWFhZTM2Y2E5NDNjN2RiMzkzNjJjMTgzNWU2NzI0NzMwYzQ0YTQ5ZmJkNzdlYWUyNjljMTkyOWUzODFi",
     },
     frame: {
       version: "1",
