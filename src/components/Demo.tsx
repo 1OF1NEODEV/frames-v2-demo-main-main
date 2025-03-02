@@ -1,29 +1,19 @@
 "use client";
-
-
-
 import Link from "next/link";
 import Image from "next/image";
 import { Check, Copy } from "lucide-react";
-
-
 import { Card } from "~/components/ui/card";
-
 import AudioPlayer from "~/components/AudioPlayer";
 import Lightbox from "~/components/Lightbox";
 import styles from '~/styles/Demo.module.css';
-
 import { useEffect, useCallback, useState, useMemo, useRef } from "react";
-
 import { signIn, signOut, getCsrfToken } from "next-auth/react";
 import sdk, {
     AddFrame,
-  FrameNotificationDetails,
-  SignIn as SignInCore,
-  FrameContext,
-  AddFrameResult,
-  AddFrameRejectedReason
+    FrameNotificationDetails,
+    SignIn as SignInCore,
 } from "@farcaster/frame-sdk";
+import type { FrameContext } from "@farcaster/frame-core";
 import {
   useAccount,
   useSendTransaction,
@@ -38,10 +28,9 @@ import {
 
 import { config } from "~/components/providers/WagmiProvider";
 import { Button } from "~/components/ui/Button";
-import { truncateAddress } from "~/lib/truncateAddress";
+
 import { base, optimism, degen, mainnet } from "wagmi/chains";
-import { BaseError, UserRejectedRequestError } from "viem";
-import { useSession } from "next-auth/react"
+
 import { createStore } from 'mipd'
 
 

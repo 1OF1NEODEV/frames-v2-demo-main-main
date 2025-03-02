@@ -256,7 +256,7 @@
     "@farcaster/frame-core" "^0.0.19"
     ox "^0.4.0"
 
-"@farcaster/frame-sdk@^0.0.20", "@farcaster/frame-sdk@0.0.20":
+"@farcaster/frame-sdk@^0.0.20":
   version "0.0.20"
   resolved "https://registry.npmjs.org/@farcaster/frame-sdk/-/frame-sdk-0.0.20.tgz"
   integrity sha512-9EbB3A9V1ZSH4NvhHVbylcDVNevJqpuGkwz4I+0bKF2936qxvMlcWclDZVEmfO/woYH0ZQgy47YYRIiS3YpIQw==

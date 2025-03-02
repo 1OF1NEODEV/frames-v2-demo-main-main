@@ -14,7 +14,7 @@
     "@farcaster/auth-kit": "^0.6.0",
     "@farcaster/frame-core": "^0.0.19",
     "@farcaster/frame-node": "^0.0.7",
-    "@farcaster/frame-sdk": "0.0.20",
+    "@farcaster/frame-sdk": "^0.0.20",
     "@farcaster/frame-wagmi-connector": "^0.0.6",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.4",
