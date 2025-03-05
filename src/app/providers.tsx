@@ -10,13 +10,12 @@ type ProvidersProps = {
   session: Session | null;
 };
 
-export function Providers({ children, session }: ProvidersProps) {
+export function Providers({ session, children }: { session: Session | null, children: React.ReactNode }) {
   return (
-    <OnchainKitProvider
-      apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-      chain={base}
-    >
-      {children}
-    </OnchainKitProvider>
+    <SessionProvider session={session}>
+      <WagmiProvider>
+        {children}
+      </WagmiProvider>
+    </SessionProvider>
   );
 }
