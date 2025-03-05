@@ -21,6 +21,7 @@
     "@radix-ui/react-aspect-ratio": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-dialog": "^1.0.0",
+    "@radix-ui/react-label": "^2.1.2",
     "@reown/walletkit": "^1.2.0",
     "@tanstack/react-query": "^5.66.5",
     "@upstash/redis": "^1.34.3",

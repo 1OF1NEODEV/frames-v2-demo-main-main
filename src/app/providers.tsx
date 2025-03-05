@@ -1,14 +1,16 @@
 "use client";
 
-import type { ReactNode } from 'react';
-import { OnchainKitProvider } from '@coinbase/onchainkit';
-import { base } from 'wagmi/chains';
-import type { Session } from 'next-auth';
+import dynamic from "next/dynamic";
+import type { Session } from "next-auth"
+import { SessionProvider } from "next-auth/react"
 
-type ProvidersProps = {
-  children: React.ReactNode;
-  session: Session | null;
-};
+
+const WagmiProvider = dynamic(
+  () => import("~/components/providers/WagmiProvider"),
+  {
+    ssr: false,
+  }
+);
 
 export function Providers({ session, children }: { session: Session | null, children: React.ReactNode }) {
   return (

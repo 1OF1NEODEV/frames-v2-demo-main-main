@@ -1,26 +1,12 @@
 "use client";
-
-
-
-import Link from "next/link";
-import Image from "next/image";
-import { Check, Copy } from "lucide-react";
-
-
-import { Card } from "~/components/ui/card";
-
-import AudioPlayer from "~/components/AudioPlayer";
-import Lightbox from "~/components/Lightbox";
-import styles from '~/styles/Demo.module.css';
-
 import { useEffect, useCallback, useState, useMemo, useRef } from "react";
-
+import { Input } from "../components/ui/input"
 import { signIn, signOut, getCsrfToken } from "next-auth/react";
 import sdk, {
     AddFrame,
   FrameNotificationDetails,
   SignIn as SignInCore,
-  FrameContext,
+  type Context,
 } from "@farcaster/frame-sdk";
 import {
   useAccount,
@@ -35,12 +21,22 @@ import {
 } from "wagmi";
 
 import { config } from "~/components/providers/WagmiProvider";
-import { Button } from "~/components/ui/Button";
 import { truncateAddress } from "~/lib/truncateAddress";
-import { base, optimism, degen, mainnet } from "wagmi/chains";
+import { base, degen, mainnet, optimism } from "wagmi/chains";
 import { BaseError, UserRejectedRequestError } from "viem";
 import { useSession } from "next-auth/react"
 import { createStore } from 'mipd'
+import { Label } from "../components/ui/label";
+
+
+import Link from "next/link";
+import Image from "next/image";
+import { Check, Copy } from "lucide-react";
+import { Card } from "~/components/ui/card";
+import AudioPlayer from "~/components/AudioPlayer";
+import Lightbox from "~/components/Lightbox";
+import styles from '~/styles/Demo.module.css';
+import { Button } from "~/components/ui/Button";
 
 
 // Constants
@@ -71,9 +67,13 @@ const customStyles = {
   }
 };
 
-export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): JSX.Element {
+export default function Demo({ title = "Don The Dog" }: { title?: string }): JSX.Element {
   
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [context, setContext] = useState<Context.FrameContext>();
+  const [isContextOpen, setIsContextOpen] = useState(false);
+  const [txHash, setTxHash] = useState<string | null>(null);
+
   const [isCopied, setIsCopied] = useState(false);
   const [isKennelImageFlipped, setIsKennelImageFlipped] = useState(false);
   const [selectedImage, setSelectedImage] = useState<null | {
@@ -85,9 +85,8 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
     collection: string;
   }>(null);
 
- const [context, setContext] = useState<FrameContext>();
-  const [isContextOpen, setIsContextOpen] = useState(false);
-  const [txHash, setTxHash] = useState<string | null>(null);
+
+
 
   const [added, setAdded] = useState(false);
   const [notificationDetails, setNotificationDetails] =
@@ -148,7 +147,7 @@ export default function Demo({ title = "Frames v2 Demo" }: { title?: string }): 
 
   const handleSwitchChain = useCallback(() => {
     switchChain({ chainId: nextChain.id });
-  }, [switchChain, chainId]);
+  }, [switchChain, nextChain.id]);
 
   useEffect(() => {
     const load = async () => {
