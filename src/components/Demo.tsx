@@ -58,19 +58,37 @@ const customStyles = {
     backgroundImage: 'url("/Backyard.png")',
     margin: '0 auto',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
-    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center top',
+    backgroundAttachment: 'scroll',
     width: '100%',
     maxWidth: '100vw',
-    height: '100%',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    position: 'relative'
   }
 };
+
+// Define extended context type
+interface ExtendedFrameContext extends FrameContext {
+  client: {
+    clientFid: number;
+    added: boolean;
+    notificationDetails?: { url: string; token: string; };
+    safeAreaInsets?: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+    };
+  };
+}
 
 export default function Demo({ title = "Don The Dog" }: { title?: string }): JSX.Element {
   
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
-  const [context, setContext] = useState<FrameContext>();
+  const [context, setContext] = useState<ExtendedFrameContext>();
   const [isContextOpen, setIsContextOpen] = useState(false);
   const [txHash, setTxHash] = useState<string | null>(null);
 
@@ -543,8 +561,33 @@ const toggleContext = useCallback(() => {
     }, 300);
   };
 
+  if (!isSDKLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <main className={`flex flex-col ${styles.container}`}>
+    <div 
+      style={{ 
+        padding: `${(context?.client.safeAreaInsets?.top ?? 0) + 16}px ${(context?.client.safeAreaInsets?.right ?? 0) + 16}px ${(context?.client.safeAreaInsets?.bottom ?? 0) + 16}px ${(context?.client.safeAreaInsets?.left ?? 0) + 16}px`,
+        width: '100%',
+        maxWidth: '100vw',
+        minHeight: '100vh',
+        overflow: 'auto',
+        position: 'relative',
+        margin: '0 auto',
+      }}
+    >
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundImage: 'url("/DON HOMER MEME.png")',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '300px auto', /* Set a fixed width for the tile and let height scale proportionally */
+        zIndex: -1,
+      }} />
       <audio ref={barkAudioRef} src="/dog-bark-type-04-293288.mp3" preload="auto" />
       
       {/* Top Right Buttons */}
@@ -1228,6 +1271,6 @@ const toggleContext = useCallback(() => {
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 }
