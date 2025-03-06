@@ -16,6 +16,13 @@ import { Button } from "~/components/ui/Button";
 import { truncateAddress } from "~/lib/truncateAddress";
 import { QuoteResponse } from "~/lib/types/zeroex";
 
+// Add custom styles for the Press Start 2P font
+const customStyles = {
+  pressStart: {
+    fontFamily: '"Press Start 2P", cursive',
+  },
+};
+
 interface Token {
   symbol: string;
   name: string;
@@ -346,15 +353,16 @@ export default function TokenSwap({ token }: { token: string }) {
         <Button
           onClick={isFinalized ? executeSwap : finalize}
           disabled={!isConnected || !sellAmount || !buyAmount || isPending}
-          className="w-full"
+          className="bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-4 py-2 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] w-full"
+          style={{ ...customStyles.pressStart, fontSize: '8px' }}
         >
           {!isConnected 
-            ? "Connect Wallet" 
+            ? "CONNECT WALLET" 
             : isPending 
-              ? "Confirming..." 
+              ? "CONFIRMING..." 
               : isFinalized 
-                ? "Confirm Swap" 
-                : "Review Swap"}
+                ? "CONFIRM SWAP" 
+                : "REVIEW SWAP"}
         </Button>
 
         {isConfirming && (

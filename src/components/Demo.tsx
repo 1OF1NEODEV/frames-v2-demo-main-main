@@ -95,6 +95,7 @@ export default function Demo({ title = "Don The Dog" }: { title?: string }): JSX
 
   const [isCopied, setIsCopied] = useState(false);
   const [isKennelImageFlipped, setIsKennelImageFlipped] = useState(false);
+  const [isPhoneWiggling, setIsPhoneWiggling] = useState(false);
   const [selectedImage, setSelectedImage] = useState<null | {
     src: string;
     title: string;
@@ -601,15 +602,6 @@ const toggleContext = useCallback(() => {
         >
           GALLERY
         </button>
-
-        {/* Buy Button */}
-        <button
-          className="bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-1.5 py-1 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
-          style={{ ...customStyles.pressStart, fontSize: '8px' }}
-          onClick={() => window.open('https://clank.fun/t/0x3801672b93E16A25120995b7201add19dC46fA22', '_blank')}
-        >
-          BUY
-        </button>
       </div>
 
       {/* DYOR Button (Bottom Right) */}
@@ -810,19 +802,90 @@ const toggleContext = useCallback(() => {
                   onClick={() => window.open('https://instagram.com/dononbase', '_blank')}
                   unoptimized
                 />
-                <Image 
-                  src="/icons8-tiktok-32.png"
-                  alt="TikTok Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://tiktok.com/@dononbase', '_blank')}
-                  unoptimized
-                />
+              </div>
+              
+              {/* Bottom Menu Bar */}
+              <div className="bg-yellow-400 border-t-4 border-black py-4 mt-7 mx-[-48px] mb-[-33px] rounded-b-3xl">
+                <div className="flex justify-around items-center px-2">
+                  <div className="flex items-center">
+                    <button 
+                      className="hover:opacity-80 transition-opacity"
+                      onClick={() => window.location.href = '/'}
+                    >
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <span style={{ ...customStyles.pressStart, fontSize: '14px', color: '#FF6B6B' }}>🏠</span>
+                      </div>
+                    </button>
+                  </div>
+                  
+                  <div className="text-black font-bold" style={{ ...customStyles.pressStart, fontSize: '14px' }}>:</div>
+                  
+                  <div className="flex items-center">
+                    <button 
+                      className="hover:opacity-80 transition-opacity"
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    >
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <span style={{ ...customStyles.pressStart, fontSize: '14px' }}>⬆️</span>
+                      </div>
+                    </button>
+                  </div>
+                  
+                  <div className="text-black font-bold" style={{ ...customStyles.pressStart, fontSize: '14px' }}>:</div>
+                  
+                  <div className="flex items-center">
+                    <button 
+                      className="hover:opacity-80 transition-opacity"
+                      onClick={() => setShowGalleryPopup(true)}
+                    >
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <span style={{ ...customStyles.pressStart, fontSize: '14px' }}>🏆</span>
+                      </div>
+                    </button>
+                  </div>
+                  
+                  <div className="text-black font-bold" style={{ ...customStyles.pressStart, fontSize: '14px' }}>:</div>
+                  
+                  <div className="flex items-center">
+                    <button 
+                      className="hover:opacity-80 transition-opacity"
+                      onClick={() => window.open('https://app.uniswap.org/swap', '_blank')}
+                    >
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <span style={{ ...customStyles.pressStart, fontSize: '14px' }}>🛒</span>
+                      </div>
+                    </button>
+                  </div>
+                  
+                  <div className="text-black font-bold" style={{ ...customStyles.pressStart, fontSize: '14px' }}>:</div>
+                  
+                  <div className="flex items-center">
+                    <button 
+                      className="hover:opacity-80 transition-opacity"
+                      onClick={() => window.open('https://warpcast.com/~/channel/don', '_blank')}
+                    >
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <span style={{ ...customStyles.pressStart, fontSize: '14px' }}>➡️</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </Card>
+
+        {/* Token Swap Component */}
+        <div className="flex justify-center items-center py-8">
+          <div className="bg-white p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+            <div className="w-full bg-black text-white px-8 py-5 flex justify-center items-center">
+              <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Buy $DON</h2>
+            </div>
+            <div className="bg-white/90 backdrop-blur-sm">
+              <TokenSwap token="clanker" />
+            </div>
+          </div>
+        </div>
 
         {/* Origin Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
@@ -883,85 +946,6 @@ const toggleContext = useCallback(() => {
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
               Circulating supply is 100,000,000,000 $DON.
               </p>
-            </div>
-          </div>
-        </Card>
-
-        {/* Token Swap Component */}
-        <div className="flex justify-center items-center py-8">
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border-2 border-[#1E293B]">
-            <TokenSwap token="clanker" />
-          </div>
-        </div>
-
-        {/* How to Buy Card */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="how-to-buy">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>How to Buy</h2>
-          </div>
-          <div className="p-9 space-y-6">
-            {/* Wallet Image */}
-            <div className="flex justify-center mb-4">
-              <Image 
-                src="/DONS_WALLET_V2.png"
-                alt="Wallet illustration"
-                width={150}
-                height={150}
-             
-                unoptimized
-              />
-            </div>
-
-            {/* Step 1 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#FF990A] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                01
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Get a Wallet</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Download a crypto wallet like MetaMask, Phantom or Raindow.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#2A69F7] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                02
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Add Base</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Purchase Base on an exchange like Binance or Coinbase, then transfer it to your wallet.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-green-500 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                03
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Connect to a DEX</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Visit a DEX like Clank.Fun, Gecko Terminal or Matcha and connect your wallet.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                04
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Swap for DON</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Paste the $DON token address, select DON, and confirm. Sign the wallet prompt to complete swap.
-                </p>
-              </div>
             </div>
           </div>
         </Card>
@@ -1184,13 +1168,31 @@ const toggleContext = useCallback(() => {
           <div className="p-6">
             {/* DON PHONE Image */}
             <div className="flex justify-center mb-2">
-              <Image 
-                src="/DON PHONE V2.png"
-                alt="Don with phone"
-                width={400}
-                height={400}
-                unoptimized
-              />
+              <div className="relative">
+                <style jsx>{`
+                  @keyframes wiggle {
+                    0%, 100% { transform: rotate(0deg); }
+                    25% { transform: rotate(-3deg); }
+                    75% { transform: rotate(3deg); }
+                  }
+                  .animate-wiggle {
+                    animation: wiggle 0.5s ease-in-out;
+                  }
+                `}</style>
+                <Image 
+                  src="/DON PHONE V2.png"
+                  alt="Don with phone"
+                  width={400}
+                  height={400}
+                  unoptimized
+                  className={`cursor-pointer ${isPhoneWiggling ? 'animate-wiggle' : ''}`}
+                  onClick={() => {
+                    playBarkSound();
+                    setIsPhoneWiggling(true);
+                    setTimeout(() => setIsPhoneWiggling(false), 500);
+                  }}
+                />
+              </div>
             </div>
 
             {/* Description Text - Moved higher up with reduced margin */}
@@ -1198,18 +1200,6 @@ const toggleContext = useCallback(() => {
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                 Join our community on warpcast today and stay connected to the latest Don news and community updates.
               </p>
-              
-              {/* Buttons - Reduced top margin */}
-              <div className="flex justify-center gap-4 mt-3">
-                
-                <button
-                  className="bg-[#2A69F7] text-white px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] hover:bg-purple-600 transition-colors duration-300"
-                  style={{ ...customStyles.pressStart, fontSize: '8px' }}
-                  onClick={() => window.open('https://warpcast.com/~/channel/don', '_blank')}
-                >
-                  JOIN CHANNEL
-                </button>
-              </div>
             </div>
           </div>
         </Card>
