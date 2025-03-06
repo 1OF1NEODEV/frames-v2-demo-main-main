@@ -19,6 +19,7 @@ import {
   useSwitchChain,
   useChainId,
 } from "wagmi";
+import TokenSwap from "~/components/TokenSwap";
 
 import { config } from "~/components/providers/WagmiProvider";
 import { truncateAddress } from "~/lib/truncateAddress";
@@ -590,6 +591,13 @@ const toggleContext = useCallback(() => {
       }} />
       <audio ref={barkAudioRef} src="/dog-bark-type-04-293288.mp3" preload="auto" />
       
+      {/* Token Swap Component */}
+      <div className="flex justify-center items-center py-8">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border-2 border-[#1E293B]">
+          <TokenSwap token="clanker" />
+        </div>
+      </div>
+
       {/* Top Right Buttons */}
       <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
         {/* Gallery Button */}
