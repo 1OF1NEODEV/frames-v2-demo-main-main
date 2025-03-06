@@ -19,6 +19,7 @@ import {
   useSwitchChain,
   useChainId,
 } from "wagmi";
+import TokenSwap from "~/components/TokenSwap";
 
 import { config } from "~/components/providers/WagmiProvider";
 import { truncateAddress } from "~/lib/truncateAddress";
@@ -885,6 +886,13 @@ const toggleContext = useCallback(() => {
             </div>
           </div>
         </Card>
+
+        {/* Token Swap Component */}
+        <div className="flex justify-center items-center py-8">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border-2 border-[#1E293B]">
+            <TokenSwap token="clanker" />
+          </div>
+        </div>
 
         {/* How to Buy Card */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="how-to-buy">
