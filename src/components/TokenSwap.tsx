@@ -195,7 +195,7 @@ export default function TokenSwap({ token }: { token: string }) {
         setFetchPriceError([errorMessage]);
       }
     }
-  }, [quote, sendTransaction, setFetchPriceError, sellToken.address, buyToken.address, sellAmount, sdk.actions]);
+  }, [quote, sendTransaction, setFetchPriceError, sellToken.address, buyToken.address, sellAmount]);
 
   useEffect(() => {
     const params = {

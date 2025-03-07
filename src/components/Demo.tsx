@@ -1121,7 +1121,7 @@ const toggleContext = useCallback(() => {
             {/* Description Text - Moved higher up with reduced margin */}
             <div className="space-y-5">
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Click here on Don's Phone to Join our community on warpcast today and stay connected to the latest Don news and community updates.
+                Click here on Don&apos;s Phone to Join our community on warpcast today and stay connected to the latest Don news and community updates.
               </p>
             </div>
           </div>
