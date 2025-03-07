@@ -35,7 +35,6 @@ import Image from "next/image";
 import { Check, Copy } from "lucide-react";
 import { Card } from "~/components/ui/card";
 import AudioPlayer from "~/components/AudioPlayer";
-import Lightbox from "~/components/Lightbox";
 import styles from '~/styles/Demo.module.css';
 import { Button } from "~/components/ui/Button";
 
@@ -94,15 +93,8 @@ export default function Demo({ title = "Don The Dog" }: { title?: string }): JSX
   const [txHash, setTxHash] = useState<string | null>(null);
 
   const [isCopied, setIsCopied] = useState(false);
+  const [isPhoneClicked, setIsPhoneClicked] = useState(false);
   const [isKennelImageFlipped, setIsKennelImageFlipped] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<null | {
-    src: string;
-    title: string;
-    artist: string;
-    description: string;
-    minted: string;
-    collection: string;
-  }>(null);
 
 
 
@@ -434,11 +426,11 @@ const toggleContext = useCallback(() => {
 
   const galleryImages = [
     {
-      src: "/don painter v2.gif",
-      title: "DON THE PAINTER",
+      src: "/DON PHONE.png",
+      title: "DON LOVES WARPCAST",
       artist: "1OF1NEO",
       description: "68 × 70 px",
-      minted: "???",
+      minted: "March 3, 2025",
       collection: "Don's Doodles"
     },
     {
@@ -601,15 +593,6 @@ const toggleContext = useCallback(() => {
         >
           GALLERY
         </button>
-
-        {/* Buy Button */}
-        <button
-          className="bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-1.5 py-1 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
-          style={{ ...customStyles.pressStart, fontSize: '8px' }}
-          onClick={() => window.open('https://clank.fun/t/0x3801672b93E16A25120995b7201add19dC46fA22', '_blank')}
-        >
-          BUY
-        </button>
       </div>
 
       {/* DYOR Button (Bottom Right) */}
@@ -705,8 +688,7 @@ const toggleContext = useCallback(() => {
                 {galleryImages.map((image, index) => (
                   <div 
                     key={index} 
-                    className="aspect-square relative rounded-xl overflow-hidden bg-gray-100 cursor-pointer"
-                    onClick={() => setSelectedImage(image)}
+                    className="aspect-square relative rounded-xl overflow-hidden bg-gray-100"
                   >
                     <div className="relative w-full h-full">
                       <Image
@@ -810,17 +792,18 @@ const toggleContext = useCallback(() => {
                   onClick={() => window.open('https://instagram.com/dononbase', '_blank')}
                   unoptimized
                 />
-                <Image 
-                  src="/icons8-tiktok-32.png"
-                  alt="TikTok Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://tiktok.com/@dononbase', '_blank')}
-                  unoptimized
-                />
               </div>
             </div>
+          </div>
+        </Card>
+
+        {/* Token Swap Component */}
+        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+          <div className="w-full bg-black text-white px-6 py-7 flex justify-center items-center">
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Buy $DON</h2>
+          </div>
+          <div className="p-6 flex justify-center">
+            <TokenSwap token="clanker" />
           </div>
         </Card>
 
@@ -883,85 +866,6 @@ const toggleContext = useCallback(() => {
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
               Circulating supply is 100,000,000,000 $DON.
               </p>
-            </div>
-          </div>
-        </Card>
-
-        {/* Token Swap Component */}
-        <div className="flex justify-center items-center py-8">
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border-2 border-[#1E293B]">
-            <TokenSwap token="clanker" />
-          </div>
-        </div>
-
-        {/* How to Buy Card */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" id="how-to-buy">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>How to Buy</h2>
-          </div>
-          <div className="p-9 space-y-6">
-            {/* Wallet Image */}
-            <div className="flex justify-center mb-4">
-              <Image 
-                src="/DONS_WALLET_V2.png"
-                alt="Wallet illustration"
-                width={150}
-                height={150}
-             
-                unoptimized
-              />
-            </div>
-
-            {/* Step 1 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#FF990A] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                01
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Get a Wallet</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Download a crypto wallet like MetaMask, Phantom or Raindow.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#2A69F7] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                02
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Add Base</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Purchase Base on an exchange like Binance or Coinbase, then transfer it to your wallet.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-green-500 text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                03
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Connect to a DEX</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Visit a DEX like Clank.Fun, Gecko Terminal or Matcha and connect your wallet.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-[#8660CC] text-white font-bold rounded-lg p-2 w-12 h-12 flex items-center justify-center shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]" style={{ ...customStyles.pressStart }}>
-                04
-              </div>
-              <div>
-                <h3 className="font-bold mb-1" style={{ ...customStyles.pressStart, fontSize: '14px' }}>Swap for DON</h3>
-                <p className="text-sm" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  Paste the $DON token address, select DON, and confirm. Sign the wallet prompt to complete swap.
-                </p>
-              </div>
             </div>
           </div>
         </Card>
@@ -1184,32 +1088,41 @@ const toggleContext = useCallback(() => {
           <div className="p-6">
             {/* DON PHONE Image */}
             <div className="flex justify-center mb-2">
-              <Image 
-                src="/DON PHONE V2.png"
-                alt="Don with phone"
-                width={400}
-                height={400}
-                unoptimized
-              />
+              <div className={`relative ${isPhoneClicked ? 'animate-wiggle' : ''}`}>
+                <style jsx>{`
+                  @keyframes wiggle {
+                    0%, 100% { transform: rotate(0deg); }
+                    25% { transform: rotate(-3deg); }
+                    75% { transform: rotate(3deg); }
+                  }
+                  .animate-wiggle {
+                    animation: wiggle 0.3s ease-in-out;
+                  }
+                `}</style>
+                <Image 
+                  src="/DON PHONE V2.png"
+                  alt="Don with phone"
+                  width={400}
+                  height={400}
+                  className="cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => {
+                    setIsPhoneClicked(true);
+                    playBarkSound();
+                    setTimeout(() => {
+                      window.open('https://warpcast.com/~/channel/don/join?inviteCode=6KxiSbv0vSN2hk7F1LriCw', '_blank');
+                      setIsPhoneClicked(false);
+                    }, 800);
+                  }}
+                  unoptimized
+                />
+              </div>
             </div>
 
             {/* Description Text - Moved higher up with reduced margin */}
             <div className="space-y-5">
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Join our community on warpcast today and stay connected to the latest Don news and community updates.
+                Click here on Don's Phone to Join our community on warpcast today and stay connected to the latest Don news and community updates.
               </p>
-              
-              {/* Buttons - Reduced top margin */}
-              <div className="flex justify-center gap-4 mt-3">
-                
-                <button
-                  className="bg-[#2A69F7] text-white px-2 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] hover:bg-purple-600 transition-colors duration-300"
-                  style={{ ...customStyles.pressStart, fontSize: '8px' }}
-                  onClick={() => window.open('https://warpcast.com/~/channel/don', '_blank')}
-                >
-                  JOIN CHANNEL
-                </button>
-              </div>
             </div>
           </div>
         </Card>
@@ -1217,18 +1130,11 @@ const toggleContext = useCallback(() => {
       </div>
 
       {/* Footer */}
-      <p className="text-center text-white text-sm mt-8" style={customStyles.bebasNeueRegular}>© 2025 By Don The Dog. All rights reserved.</p>
+      <p className="text-center text-white text-xs mt-8" style={customStyles.bebasNeueRegular}>© 2025 By Don The Dog. All rights reserved.</p>
       <p className="text-center text-white text-xs mt-1" style={customStyles.bebasNeueRegular}>Version 1.0.0</p>
       
       <AudioPlayer 
         audioSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jay%20Dee%2037%20(Instrumental)-QoxzWgM4DtkvNjpIp60Afh1pw9m8yC.mp3" 
-      />
-
-      {/* Lightbox */}
-      <Lightbox
-        isOpen={selectedImage !== null}
-        onClose={() => setSelectedImage(null)}
-        image={selectedImage || galleryImages[0]}
       />
 
       {/* Victory Popup */}
