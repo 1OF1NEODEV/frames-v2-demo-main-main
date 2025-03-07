@@ -51,7 +51,7 @@ const DEMO_TOKENS: Token[] = [
 ];
 
 const AFFILIATE_FEE = 25;
-const PROTOCOL_GUILD_ADDRESS = "0x32e3C7fD24e175701A35c224f2238d18439C7dBC";
+const PROTOCOL_GUILD_ADDRESS = "0x6DeF89c1DdD0152e8463D0B6e4934Ec42f1342f0";
 
 export default function TokenSwap({ token }: { token: string }) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
