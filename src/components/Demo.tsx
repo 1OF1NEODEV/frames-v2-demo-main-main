@@ -717,17 +717,17 @@ const toggleContext = useCallback(() => {
 
       <div className="max-w-[324px] mx-auto space-y-6 mt-16">
         {/* Contract Address Card */}
-        <Card className="bg-white text-black p-12 pb-4 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
+        <Card className="bg-white text-black p-12 pb-1 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="flex flex-col">
             {/* Title Section */}
             <div className="text-center mb-4">
               {/* DON Character Image */}
-              <div className="flex justify-center mb-8">
+              <div className="flex justify-center mb-6">
                 <Image
-                  src="/don-painter.gif"
+                  src="/DON-FULL-BODY-v2.gif"
                   alt="DON character with purple top hat and headphones"
-                  width={220}
-                  height={220}
+                  width={100}
+                  height={100}
                   className="object-contain"
                   unoptimized
                 />
@@ -736,7 +736,7 @@ const toggleContext = useCallback(() => {
               <p className="text-base mb-2" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
               
               {/* Contract Address */}
-              <div className="flex items-center justify-center mb-4">
+              <div className="flex items-center justify-center mt-2 mb-4">
                 <div className={`bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-1 py-0.5 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] relative flex items-center gap-1 max-w-[280px] ${isCopied ? 'animate-wiggle' : ''}`}>
                   <style jsx>{`
                     @keyframes wiggle {
@@ -762,37 +762,6 @@ const toggleContext = useCallback(() => {
                   </button>
                 </div>
               </div>
-              
-              {/* Social Icons */}
-              <div className="flex justify-center gap-3">
-                <Image 
-                  src="/icons8-twitter-bird-32.png"
-                  alt="Twitter Bird Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://twitter.com/dononbase', '_blank')}
-                  unoptimized
-                />
-                <Image 
-                  src="/icons8-telegram-app-32.png"
-                  alt="Telegram Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://t.me/dononbase', '_blank')}
-                  unoptimized
-                />
-                <Image 
-                  src="/icons8-instagram-32.png"
-                  alt="Instagram Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://instagram.com/dononbase', '_blank')}
-                  unoptimized
-                />
-              </div>
             </div>
           </div>
         </Card>
@@ -816,10 +785,10 @@ const toggleContext = useCallback(() => {
             {/* Origin Image */}
             <div className="flex justify-center mb-7">
               <Image 
-                src="/DON-FULL-BODY-v2.gif"
+                src="/WHITE HEART.png"
                 alt="Don character illustration"
-                width={100}
-                height={100}
+                width={150}
+                height={150}
        
                 unoptimized
               />
@@ -1083,7 +1052,7 @@ const toggleContext = useCallback(() => {
         {/* New Container with DON PHONE.gif */}
         <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
           <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Warpcast</h2>
+            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Socials</h2>
           </div>
           <div className="p-6">
             {/* DON PHONE Image */}
@@ -1119,10 +1088,32 @@ const toggleContext = useCallback(() => {
             </div>
 
             {/* Description Text - Moved higher up with reduced margin */}
-            <div className="space-y-5">
+            <div className="space-y-4">
               <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Click here on Don&apos;s Phone to Join our community on warpcast today and stay connected to the latest Don news and community updates.
+                Click Don&apos;s Phone to Join our channel on warpcast, stay connected to the latest Don news and community updates. Don&apos;t forget to follow us on all socials!
               </p>
+              
+              {/* Social Icons */}
+              <div className="flex justify-center gap-3 mt-4">
+                <Image 
+                  src="/icons8-twitter-bird-32.png"
+                  alt="Twitter Bird Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://twitter.com/dononbase', '_blank')}
+                  unoptimized
+                />
+                <Image 
+                  src="/icons8-telegram-app-32.png"
+                  alt="Telegram Logo"
+                  width={24}
+                  height={24}
+                  className="hover:opacity-80 transition-opacity cursor-pointer"
+                  onClick={() => window.open('https://t.me/dononbase', '_blank')}
+                  unoptimized
+                />
+              </div>
             </div>
           </div>
         </Card>

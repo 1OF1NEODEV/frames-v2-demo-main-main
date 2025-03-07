@@ -265,9 +265,9 @@ export default function TokenSwap({ token }: { token: string }) {
                 onChange={(e) => setSellAmount(e.target.value)}
                 placeholder="0.0"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800"
-                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '10px' }}
+                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '8px' }}
               />
-              <div className="absolute right-2 top-2 flex items-center gap-2 bg-white dark:bg-gray-700 px-2 py-1 rounded-md">
+              <div className="absolute right-3 top-2 flex items-center gap-2 bg-white dark:bg-gray-700 px-2 py-1 rounded-md">
                 <Image
                   src={ETH.image}
                   alt={ETH.symbol}
