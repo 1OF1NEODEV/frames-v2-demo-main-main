@@ -16,6 +16,19 @@ import { Button } from "~/components/ui/Button";
 import { truncateAddress } from "~/lib/truncateAddress";
 import { QuoteResponse } from "~/lib/types/zeroex";
 
+// Helper function to format balance with limited decimals
+const formatBalance = (balance?: string, decimals = 4) => {
+  if (!balance) return '0';
+  
+  // If the balance contains a decimal point
+  if (balance.includes('.')) {
+    const [whole, fraction] = balance.split('.');
+    return `${whole}.${fraction.slice(0, decimals)}`;
+  }
+  
+  return balance;
+};
+
 interface Token {
   symbol: string;
   name: string;
@@ -270,11 +283,11 @@ export default function TokenSwap({ token }: { token: string }) {
               </div>
               <div className="text-sm text-gray-500 text-right flex justify-between items-center bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-md" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                 <span className="text-gray-700 dark:text-gray-300">DON Balance:</span>
-                <span className="font-medium">{donBalance?.formatted || '0'} {donBalance?.symbol || 'DON'}</span>
+                <span className="font-medium">{formatBalance(donBalance?.formatted, 4)} {donBalance?.symbol || 'DON'}</span>
               </div>
               <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                 <span className="text-gray-600 dark:text-gray-400">ETH Balance:</span>
-                <span>{ethBalance?.formatted || '0'} {ethBalance?.symbol}</span>
+                <span>{formatBalance(ethBalance?.formatted, 4)} {ethBalance?.symbol}</span>
               </div>
             </>
           )}
@@ -308,7 +321,7 @@ export default function TokenSwap({ token }: { token: string }) {
               </div>
               {ethBalance && (
                 <div className="absolute left-2 -bottom-6 text-xs text-gray-500" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
-                  Max: {ethBalance.formatted} {ethBalance.symbol}
+                  Max: {formatBalance(ethBalance.formatted, 4)} {ethBalance.symbol}
                 </div>
               )}
             </div>
