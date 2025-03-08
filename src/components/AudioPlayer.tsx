@@ -47,14 +47,14 @@ export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
       <audio ref={audioRef} src={audioSrc} loop />
       <button
         onClick={togglePlay}
-        className={`p-2 transition-transform hover:scale-110 bg-white hover:bg-gray-100 rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] ${isPlaying ? 'animate-pulse' : ''}`}
+        className={`p-1 transition-transform hover:scale-110 bg-white hover:bg-gray-100 rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,0.2)] ${isPlaying ? 'animate-pulse' : ''}`}
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
       >
         <Image
           src={isPlaying ? "/icons8-speaker-32.png" : "/icons8-mute-32.png"}
           alt={isPlaying ? "Pause" : "Play"}
-          width={24}
-          height={24}
+          width={16}
+          height={16}
           className="transition-opacity hover:opacity-100 opacity-70"
         />
       </button>
