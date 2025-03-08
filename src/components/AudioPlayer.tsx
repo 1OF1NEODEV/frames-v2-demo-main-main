@@ -43,11 +43,11 @@ export default function AudioPlayer({ audioSrc }: AudioPlayerProps) {
   }, []);
 
   return (
-    <div className="fixed top-4 left-4 z-50">
+    <div className="fixed bottom-4 right-4 z-50">
       <audio ref={audioRef} src={audioSrc} loop />
       <button
         onClick={togglePlay}
-        className={`p-2 transition-transform hover:scale-110 ${isPlaying ? 'animate-pulse' : ''}`}
+        className={`p-2 transition-transform hover:scale-110 bg-white hover:bg-gray-100 rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] ${isPlaying ? 'animate-pulse' : ''}`}
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
       >
         <Image
