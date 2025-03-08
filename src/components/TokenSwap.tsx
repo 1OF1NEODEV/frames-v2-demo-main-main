@@ -237,7 +237,7 @@ export default function TokenSwap({ token }: { token: string }) {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-[300px] py-4">
+      <div className="w-[280px] py-5 px-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md">
         <div className="mb-4 space-y-2">
           {address && (
             <>
@@ -264,18 +264,18 @@ export default function TokenSwap({ token }: { token: string }) {
                 value={sellAmount}
                 onChange={(e) => setSellAmount(e.target.value)}
                 placeholder="0.0"
-                className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800"
-                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '8px' }}
+                className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
+                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '7px' }}
               />
-              <div className="absolute right-3 top-2 flex items-center gap-2 bg-white dark:bg-gray-700 px-2 py-1 rounded-md">
+              <div className="absolute right-3 top-0 bottom-0 flex items-center justify-center gap-2 bg-gray-300 dark:bg-gray-600 px-3 py-1.5 rounded-md my-auto h-fit">
                 <Image
                   src={ETH.image}
                   alt={ETH.symbol}
                   width={100}
                   height={100}
-                  className="w-4 h-4 rounded-full"
+                  className="w-3 h-3 rounded-full"
                 />
-                <div className="bg-transparent border-none outline-none" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '8px' }}>
+                <div className="bg-transparent border-none outline-none" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '7px' }}>
                   {ETH.symbol}
                 </div>
               </div>
@@ -288,8 +288,8 @@ export default function TokenSwap({ token }: { token: string }) {
           </div>
 
           {/* Buy Token Input */}
-          <div className="space-y-1">
-            <label className="text-sm text-gray-600 dark:text-gray-400 pl-3" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>You Receive</label>
+          <div className="space-y-2 mt-6 pb-4">
+            <label className="text-sm text-gray-600 dark:text-gray-400 pl-2" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>You Receive</label>
             <div className="relative">
               <input
                 type="number"
@@ -297,21 +297,21 @@ export default function TokenSwap({ token }: { token: string }) {
                 value={buyAmount}
                 onChange={(e) => setBuyAmount(e.target.value)}
                 placeholder="0.0"
-                className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800"
-                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '10px' }}
+                className="w-full px-4 py-4 rounded-lg bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
+                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '7px' }}
               />
               {isPriceLoading && (
-                <div className="absolute inset-0 flex items-center justify-center rounded-md pl-4 bg-gray-100/50 dark:bg-gray-800/50">
-                  <div className="w-4 h-4 border-2 border-[#7C65C1] border-t-transparent rounded-full animate-spin" />
+                <div className="absolute inset-0 flex items-center justify-center rounded-md pl-4 bg-gray-200/50 dark:bg-gray-700/50">
+                  <div className="w-3 h-3 border-2 border-[#7C65C1] border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
-              <div className="absolute right-2 top-2 flex items-center gap-2 bg-white dark:bg-gray-700 px-2 py-1 rounded-md">
+              <div className="absolute right-3 top-0 bottom-0 flex items-center justify-center gap-2 bg-gray-300 dark:bg-gray-600 px-3 py-2 rounded-md my-auto h-fit">
                 <Image
                   src={buyToken.image}
                   alt={buyToken.symbol}
                   width={100}
                   height={100}
-                  className="w-4 h-4 rounded-full"
+                  className="w-3 h-3 rounded-full"
                 />
                 <select
                   value={buyToken.symbol}
@@ -322,36 +322,37 @@ export default function TokenSwap({ token }: { token: string }) {
                     )
                   }
                   className="bg-transparent border-none outline-none dark:text-white"
-                  style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '8px' }}
+                  style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '7px' }}
                 >
                   {DEMO_TOKENS.map((token) => (
-                    <option key={token.symbol} value={token.symbol} style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '8px' }}>
+                    <option key={token.symbol} value={token.symbol}>
                       {token.symbol}
                     </option>
                   ))}
                 </select>
               </div>
             </div>
+            <div className="h-3"></div>
           </div>
 
           {quote && (
-            <div className="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-lg space-y-2 text-sm" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+            <div className="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg space-y-2 text-sm mt-4 border border-gray-300 dark:border-gray-600" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
               <div className="flex justify-between">
-                <span className="text-gray-600 dark:text-gray-400">Minimum received:</span>
+                <span className="text-gray-700 dark:text-gray-300">Minimum received:</span>
                 <span>{formatUnits(BigInt(quote.minBuyAmount), buyToken.decimals)} {buyToken.symbol}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600 dark:text-gray-400">Network:</span>
+                <span className="text-gray-700 dark:text-gray-300">Network:</span>
                 <span>Base</span>
               </div>
             </div>
           )}
 
-          <div className="flex items-center justify-center mt-10">
+          <div className="flex items-center justify-center mt-8">
             <button
               onClick={isFinalized ? executeSwap : finalize}
               disabled={!isConnected || !sellAmount || !buyAmount || isPending}
-              className={`bg-white hover:bg-gray-100 text-[#1E293B] font-bold px-4 py-2 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] ${(!isConnected || !sellAmount || !buyAmount || isPending) ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-[#1E293B] dark:text-white font-bold px-4 py-2 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] ${(!isConnected || !sellAmount || !buyAmount || isPending) ? 'opacity-50 cursor-not-allowed' : ''}`}
               style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}
             >
               {!isConnected 
@@ -365,30 +366,30 @@ export default function TokenSwap({ token }: { token: string }) {
           </div>
 
           {isConfirming && (
-            <div className="text-orange-500 text-center mt-4 p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
-              ⏳ Waiting for confirmation...
+            <div className="text-orange-600 dark:text-orange-400 text-center mt-4 p-3 bg-orange-100 dark:bg-orange-900/40 rounded-lg border border-orange-200 dark:border-orange-800" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+              Waiting for confirmation ...
             </div>
           )}
           {isConfirmed && (
             <div
-              className="text-green-500 text-center mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg cursor-pointer"
+              className="text-green-600 dark:text-green-400 text-center mt-4 p-3 bg-green-100 dark:bg-green-900/40 rounded-lg border border-green-200 dark:border-green-800 cursor-pointer"
               onClick={() => linkToBaseScan(hash)}
               style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}
             >
-              <p>🎉 Transaction Confirmed!</p>
+              <p>Transaction Confirmed!</p>
               <p className="text-sm">Tap to View on Basescan</p>
             </div>
           )}
 
           {fetchPriceError.length > 0 && (
-            <div className="text-red-500 text-sm mt-2 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+            <div className="text-red-600 dark:text-red-400 text-sm mt-4 p-3 bg-red-100 dark:bg-red-900/40 rounded-lg border border-red-200 dark:border-red-800" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
               {fetchPriceError.map((error, index) => (
                 <div key={index}>{error}</div>
               ))}
             </div>
           )}
           {error && (
-            <div className="text-red-500 text-sm mt-2 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+            <div className="text-red-600 dark:text-red-400 text-sm mt-4 p-3 bg-red-100 dark:bg-red-900/40 rounded-lg border border-red-200 dark:border-red-800" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
               Error: {(error as BaseError).shortMessage || error.message}
             </div>
           )}

@@ -726,8 +726,8 @@ const toggleContext = useCallback(() => {
                 <Image
                   src="/DON-FULL-BODY-v2.gif"
                   alt="DON character with purple top hat and headphones"
-                  width={100}
-                  height={100}
+                  width={120}
+                  height={120}
                   className="object-contain"
                   unoptimized
                 />
@@ -785,10 +785,10 @@ const toggleContext = useCallback(() => {
             {/* Origin Image */}
             <div className="flex justify-center mb-7">
               <Image 
-                src="/WHITE HEART.png"
+                src="/KING DON.png"
                 alt="Don character illustration"
-                width={150}
-                height={150}
+                width={120}
+                height={120}
        
                 unoptimized
               />
