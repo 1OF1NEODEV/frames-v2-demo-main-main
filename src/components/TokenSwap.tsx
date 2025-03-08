@@ -69,6 +69,7 @@ export default function TokenSwap({ token }: { token: string }) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const barkSoundRef = useRef<HTMLAudioElement | null>(null);
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const [isClosingSuccessPopup, setIsClosingSuccessPopup] = useState(false);
 
   const sellToken = ETH;
   const [sellAmount, setSellAmount] = useState("");
@@ -266,6 +267,14 @@ export default function TokenSwap({ token }: { token: string }) {
     fetchQuote,
   ]);
 
+  // Function to close the success popup
+  const handleCloseSuccessPopup = () => {
+    setIsClosingSuccessPopup(true);
+    setTimeout(() => {
+      setIsClosingSuccessPopup(false);
+    }, 300);
+  };
+
   if (!isSDKLoaded) {
     return <div>Loading...</div>;
   }
@@ -406,14 +415,65 @@ export default function TokenSwap({ token }: { token: string }) {
               Waiting for confirmation ...
             </div>
           )}
+
+          {/* Success Popup */}
           {isConfirmed && (
-            <div
-              className="text-green-600 dark:text-green-400 text-center mt-4 p-3 bg-green-100 dark:bg-green-900/40 rounded-lg border border-green-200 dark:border-green-800 cursor-pointer"
-              onClick={() => linkToBaseScan(hash)}
-              style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}
+            <div 
+              className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 transition-opacity duration-300"
+              onClick={handleCloseSuccessPopup}
             >
-              <p>Transaction Confirmed!</p>
-              <p className="text-xs opacity-80" style={{ fontSize: '5px' }}>Tap to View on Basescan</p>
+              <div 
+                className={`bg-white rounded-3xl p-0 max-w-[300px] w-full mx-4 relative border-2 border-[#1E293B] transition-all duration-300 ${
+                  isClosingSuccessPopup ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="absolute top-3 right-3 text-white hover:opacity-70 z-10"
+                  onClick={handleCloseSuccessPopup}
+                  style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '16px' }}
+                >
+                  ×
+                </button>
+
+                {/* Black Header with Title */}
+                <div className="w-full bg-black text-white px-6 py-4 flex justify-center items-center rounded-t-3xl">
+                  <h2 className="text-xl font-semibold text-center" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '16px' }}>
+                    Success!
+                  </h2>
+                </div>
+                
+                <div className="p-6">
+                  {/* Success Image */}
+                  <div className="flex justify-center mb-5">
+                    <Image 
+                      src="/DON'S PAW.png"
+                      alt="DON paw illustration"
+                      width={80}
+                      height={80}
+                      unoptimized
+                    />
+                  </div>
+
+                  {/* Success Text */}
+                  <p className="text-center text-sm leading-relaxed mb-4" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                    Transaction Confirmed!
+                  </p>
+                  
+                  {/* Basescan Link */}
+                  <div 
+                    className="bg-green-100 dark:bg-green-900/40 p-3 rounded-lg border border-green-200 dark:border-green-800 cursor-pointer text-center"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      linkToBaseScan(hash);
+                    }}
+                  >
+                    <p className="text-green-600 dark:text-green-400 text-sm" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+                      Tap to View on Basescan
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
