@@ -447,7 +447,7 @@ export default function TokenSwap({ token }: { token: string }) {
                   {/* Success Image */}
                   <div className="flex justify-center mb-5">
                     <Image 
-                      src="/DON'S PAW.png"
+                      src="/7736b1d30d303e4.gif"
                       alt="DON paw illustration"
                       width={80}
                       height={80}
