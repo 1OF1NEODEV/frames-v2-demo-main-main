@@ -76,6 +76,13 @@ export default function TokenSwap({ token }: { token: string }) {
   const { data: ethBalance } = useBalance({
     address,
   });
+  
+  // Add DON token balance hook
+  const donToken = DEMO_TOKENS.find(t => t.symbol === "DON");
+  const { data: donBalance } = useBalance({
+    address,
+    token: donToken?.address as `0x${string}`,
+  });
 
   const parsedSellAmount = sellAmount
     ? parseUnits(sellAmount, sellToken.decimals).toString()
@@ -254,14 +261,19 @@ export default function TokenSwap({ token }: { token: string }) {
     <div className="flex justify-center items-center">
       <div className="w-[280px] py-5 px-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md">
         <div className="mb-4 space-y-2">
+          {/* Existing wallet and balance display */}
           {address && (
             <>
               <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                 <span className="text-gray-600 dark:text-gray-400">Wallet:</span>
                 <span>{truncateAddress(address)}</span>
               </div>
-              <div className="text-sm text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                <span className="text-gray-600 dark:text-gray-400">Balance:</span>
+              <div className="text-sm text-gray-500 text-right flex justify-between items-center bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-md" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                <span className="text-gray-700 dark:text-gray-300">DON Balance:</span>
+                <span className="font-medium">{donBalance?.formatted || '0'} {donBalance?.symbol || 'DON'}</span>
+              </div>
+              <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                <span className="text-gray-600 dark:text-gray-400">ETH Balance:</span>
                 <span>{ethBalance?.formatted || '0'} {ethBalance?.symbol}</span>
               </div>
             </>
@@ -392,7 +404,7 @@ export default function TokenSwap({ token }: { token: string }) {
               style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}
             >
               <p>Transaction Confirmed!</p>
-              <p className="text-sm">Tap to View on Basescan</p>
+              <p className="text-xs opacity-80" style={{ fontSize: '5px' }}>Tap to View on Basescan</p>
             </div>
           )}
 
