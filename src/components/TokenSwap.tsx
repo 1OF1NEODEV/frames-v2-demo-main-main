@@ -70,6 +70,7 @@ export default function TokenSwap({ token }: { token: string }) {
   const barkSoundRef = useRef<HTMLAudioElement | null>(null);
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [isClosingSuccessPopup, setIsClosingSuccessPopup] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const sellToken = ETH;
   const [sellAmount, setSellAmount] = useState("");
@@ -267,10 +268,18 @@ export default function TokenSwap({ token }: { token: string }) {
     fetchQuote,
   ]);
 
+  // Watch for confirmed transactions and show the success popup
+  useEffect(() => {
+    if (isConfirmed) {
+      setShowSuccessPopup(true);
+    }
+  }, [isConfirmed]);
+
   // Function to close the success popup
   const handleCloseSuccessPopup = () => {
     setIsClosingSuccessPopup(true);
     setTimeout(() => {
+      setShowSuccessPopup(false);
       setIsClosingSuccessPopup(false);
     }, 300);
   };
@@ -417,7 +426,7 @@ export default function TokenSwap({ token }: { token: string }) {
           )}
 
           {/* Success Popup */}
-          {isConfirmed && (
+          {showSuccessPopup && (
             <div 
               className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 transition-opacity duration-300"
               onClick={handleCloseSuccessPopup}
@@ -449,8 +458,8 @@ export default function TokenSwap({ token }: { token: string }) {
                     <Image 
                       src="/7736b1d30d303e4.gif"
                       alt="DON paw illustration"
-                      width={80}
-                      height={80}
+                      width={120}
+                      height={120}
                       unoptimized
                     />
                   </div>
