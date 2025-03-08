@@ -69,6 +69,8 @@ const PROTOCOL_GUILD_ADDRESS = "0x6DeF89c1DdD0152e8463D0B6e4934Ec42f1342f0";
 export default function TokenSwap({ token }: { token: string }) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const barkSoundRef = useRef<HTMLAudioElement | null>(null);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const [isCopied, setIsCopied] = useState(false);
 
   const sellToken = ETH;
   const [sellAmount, setSellAmount] = useState("");
@@ -266,6 +268,18 @@ export default function TokenSwap({ token }: { token: string }) {
     fetchQuote,
   ]);
 
+  // Function to copy address to clipboard
+  const copyAddressToClipboard = () => {
+    if (address) {
+      navigator.clipboard.writeText(address)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 2000);
+        })
+        .catch(err => console.error('Failed to copy address: ', err));
+    }
+  };
+
   if (!isSDKLoaded) {
     return <div>Loading...</div>;
   }
@@ -279,10 +293,21 @@ export default function TokenSwap({ token }: { token: string }) {
             <>
               <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                 <span className="text-gray-600 dark:text-gray-400">Wallet:</span>
-                <span>{truncateAddress(address)}</span>
+                <div className="relative group">
+                  <button
+                    className="bg-white hover:bg-gray-100 text-[#1E293B] dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white font-bold px-1.5 py-1 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] transition-all duration-200"
+                    style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '7px' }}
+                    onClick={copyAddressToClipboard}
+                  >
+                    {isCopied ? "COPIED!" : truncateAddress(address)}
+                  </button>
+                  <div className="absolute right-0 -bottom-5 invisible group-hover:visible text-xs text-gray-500" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '5px' }}>
+                    Click to copy
+                  </div>
+                </div>
               </div>
-              <div className="text-sm text-gray-500 text-right flex justify-between items-center bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-md" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                <span className="text-gray-700 dark:text-gray-300">DON Balance:</span>
+              <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                <span className="text-gray-600 dark:text-gray-400">DON Balance:</span>
                 <span className="font-medium">{formatBalance(donBalance?.formatted, 4)} {donBalance?.symbol || 'DON'}</span>
               </div>
               <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
