@@ -289,7 +289,7 @@ export default function TokenSwap({ token }: { token: string }) {
 
           {/* Buy Token Input */}
           <div className="space-y-1">
-            <label className="text-sm text-gray-600 dark:text-gray-400 pl-2" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>You Receive</label>
+            <label className="text-sm text-gray-600 dark:text-gray-400 pl-3" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>You Receive</label>
             <div className="relative">
               <input
                 type="number"
