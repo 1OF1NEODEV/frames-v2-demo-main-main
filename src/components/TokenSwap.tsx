@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import sdk from "@farcaster/frame-sdk";
 import {
   useAccount,
@@ -55,6 +55,7 @@ const PROTOCOL_GUILD_ADDRESS = "0x6DeF89c1DdD0152e8463D0B6e4934Ec42f1342f0";
 
 export default function TokenSwap({ token }: { token: string }) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const barkSoundRef = useRef<HTMLAudioElement | null>(null);
 
   const sellToken = ETH;
   const [sellAmount, setSellAmount] = useState("");
@@ -107,6 +108,20 @@ export default function TokenSwap({ token }: { token: string }) {
       load();
     }
   }, [isSDKLoaded]);
+
+  // Initialize bark sound
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      barkSoundRef.current = new Audio('/dog-bark-type-04-293288.mp3');
+    }
+  }, []);
+  
+  // Play bark sound when transaction is confirmed
+  useEffect(() => {
+    if (isConfirmed && barkSoundRef.current) {
+      barkSoundRef.current.play().catch(err => console.error("Error playing bark sound:", err));
+    }
+  }, [isConfirmed]);
 
   const finalize = useCallback(() => {
     setIsFinalized(true);
@@ -280,7 +295,7 @@ export default function TokenSwap({ token }: { token: string }) {
                 </div>
               </div>
               {ethBalance && (
-                <div className="absolute left-2 -bottom-5 text-xs text-gray-500" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+                <div className="absolute left-2 -bottom-6 text-xs text-gray-500" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
                   Max: {ethBalance.formatted} {ethBalance.symbol}
                 </div>
               )}
@@ -288,7 +303,7 @@ export default function TokenSwap({ token }: { token: string }) {
           </div>
 
           {/* Buy Token Input */}
-          <div className="space-y-2 mt-10 pb-4">
+          <div className="space-y-2 mt-6 pb-4">
             <label className="text-sm text-gray-600 dark:text-gray-400 pl-2" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>You Receive</label>
             <div className="relative">
               <input
@@ -336,12 +351,12 @@ export default function TokenSwap({ token }: { token: string }) {
           </div>
 
           {quote && (
-            <div className="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg space-y-2 text-sm mt-4 border border-gray-300 dark:border-gray-600" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
-              <div className="flex justify-between">
-                <span className="text-gray-700 dark:text-gray-300">Minimum received:</span>
-                <span>{formatUnits(BigInt(quote.minBuyAmount), buyToken.decimals)} {buyToken.symbol}</span>
+            <div className="bg-gray-200 dark:bg-gray-700 p-3 rounded-lg space-y-1 text-xs mt-4 border border-gray-300 dark:border-gray-600" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '5px' }}>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700 dark:text-gray-300 truncate mr-2">Min received:</span>
+                <span className="text-right">{formatUnits(BigInt(quote.minBuyAmount), buyToken.decimals)} {buyToken.symbol}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <span className="text-gray-700 dark:text-gray-300">Network:</span>
                 <span>Base</span>
               </div>
