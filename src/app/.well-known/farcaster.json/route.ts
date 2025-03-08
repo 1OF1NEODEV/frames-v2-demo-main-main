@@ -15,7 +15,7 @@ export async function GET() {
       iconUrl: `${appUrl}/COMING SOON (2).png`,
       homeUrl: "https://donthedog.vercel.app/",
       imageUrl: `${appUrl}/frame-cast.png`,
-      buttonTitle: "Launch Don",
+      buttonTitle: "Launch Don App",
       splashImageUrl: `${appUrl}/COMING SOON (2).png`,
       splashBackgroundColor: "#2A69F7",
       webhookUrl: `${appUrl}/api/webhook`,
