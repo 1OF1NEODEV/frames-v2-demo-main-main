@@ -458,8 +458,8 @@ export default function TokenSwap({ token }: { token: string }) {
                     <Image 
                       src="/7736b1d30d303e4.gif"
                       alt="DON paw illustration"
-                      width={120}
-                      height={120}
+                      width={100}
+                      height={100}
                       unoptimized
                     />
                   </div>
