@@ -13,7 +13,6 @@ import { parseUnits, formatUnits, BaseError } from "viem";
 import qs from "qs";
 
 import { Button } from "~/components/ui/Button";
-import { truncateAddress } from "~/lib/truncateAddress";
 import { QuoteResponse } from "~/lib/types/zeroex";
 
 // Helper function to format balance with limited decimals
@@ -278,10 +277,6 @@ export default function TokenSwap({ token }: { token: string }) {
           {/* Existing wallet and balance display */}
           {address && (
             <>
-              <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                <span className="text-gray-600 dark:text-gray-400">Wallet:</span>
-                <span>{truncateAddress(address)}</span>
-              </div>
               <div className="text-sm text-gray-500 text-right flex justify-between items-center" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
                 <span className="text-gray-600 dark:text-gray-400">DON Balance:</span>
                 <span className="font-medium">{formatBalance(donBalance?.formatted, 4)} {donBalance?.symbol || 'DON'}</span>
