@@ -280,7 +280,7 @@ export default function TokenSwap({ token }: { token: string }) {
                 </div>
               </div>
               {ethBalance && (
-                <div className="absolute left-2 -bottom-6 text-xs text-gray-500" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
+                <div className="absolute left-2 -bottom-5 text-xs text-gray-500" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '6px' }}>
                   Max: {ethBalance.formatted} {ethBalance.symbol}
                 </div>
               )}
@@ -288,7 +288,7 @@ export default function TokenSwap({ token }: { token: string }) {
           </div>
 
           {/* Buy Token Input */}
-          <div className="space-y-2 mt-6 pb-4">
+          <div className="space-y-2 mt-10 pb-4">
             <label className="text-sm text-gray-600 dark:text-gray-400 pl-2" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>You Receive</label>
             <div className="relative">
               <input
