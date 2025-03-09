@@ -7,13 +7,13 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/frame-cast.png`,
   button: {
-    title: "Launch Don",
+    title: "Launch Don App",
     action: {
       type: "launch_frame",
       name: "Don The Dog",
       url: appUrl,
       splashImageUrl: `${appUrl}/COMING SOON (2).png`,
-      splashBackgroundColor: "#ffffff",
+      splashBackgroundColor: "#2A69F7",
     },
   },
 };
