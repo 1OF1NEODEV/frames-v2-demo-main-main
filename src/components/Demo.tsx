@@ -1110,7 +1110,7 @@ const toggleContext = useCallback(() => {
                   width={24}
                   height={24}
                   className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://t.me/dononbase', '_blank')}
+                  onClick={() => window.open('https://t.me/donthedog', '_blank')}
                   unoptimized
                 />
               </div>
