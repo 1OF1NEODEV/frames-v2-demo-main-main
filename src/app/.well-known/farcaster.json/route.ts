@@ -12,12 +12,12 @@ export async function GET() {
     frame: {
       version: "1",
       name: "Don The Dog",
-      iconUrl: `${appUrl}/COMING SOON (2).png`,
+      iconUrl: `${appUrl}/updated logo.png`,
       homeUrl: "https://donthedog.vercel.app/",
       imageUrl: `${appUrl}/frame-cast.png`,
       buttonTitle: "Launch Don App",
-      splashImageUrl: `${appUrl}/COMING SOON (2).png`,
-      splashBackgroundColor: "#2A69F7",
+      splashImageUrl: `${appUrl}/updated logo.png`,
+      splashBackgroundColor: "#FFFFFF",
       webhookUrl: `${appUrl}/api/webhook`,
     },
   };

@@ -12,7 +12,7 @@ const frame = {
       type: "launch_frame",
       name: "Don The Dog",
       url: appUrl,
-      splashImageUrl: `${appUrl}/COMING SOON (2).png`,
+      splashImageUrl: `${appUrl}/updated logo.png`,
       splashBackgroundColor: "#2A69F7",
     },
   },
