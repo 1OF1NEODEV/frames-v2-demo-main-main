@@ -5,8 +5,8 @@ import "~/app/globals.css";
 import { Providers } from "~/app/providers";
 
 export const metadata: Metadata = {
-  title: "Don Da Degen Dog",
-  description: "Coolest Degenerate Pixel Dog on Base.",
+  title: "Don The Dog",
+  description: "Coolest Degenerate Dog on Base.",
 };
 
 export default async function RootLayout({

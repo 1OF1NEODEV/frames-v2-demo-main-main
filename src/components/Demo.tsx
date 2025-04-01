@@ -733,7 +733,7 @@ const toggleContext = useCallback(() => {
                 />
               </div>
               <h1 className="text-6xl font-bold mb-2" style={customStyles.pressStart}>DON</h1>
-              <p className="text-base mb-2" style={customStyles.bebasNeueRegular}>Coolest Degenerate Pixel Dog on Base</p>
+              <p className="text-base mb-2" style={customStyles.bebasNeueRegular}>Coolest Degenerate Dog on Base</p>
               
               {/* Contract Address */}
               <div className="flex items-center justify-center mt-2 mb-4">
@@ -1042,75 +1042,6 @@ const toggleContext = useCallback(() => {
                   height={24}
                   className="hover:opacity-80 transition-opacity cursor-pointer"
                   onClick={() => window.open('https://discord.gg/haGDJ2UWPG', '_blank')}
-                  unoptimized
-                />
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* New Container with DON PHONE.gif */}
-        <Card className="bg-white text-black p-0 rounded-3xl overflow-hidden border-4 border-black shadow-[4px_4px_8px_0px_rgba(0,0,0,0.3)]">
-          <div className="w-full bg-black text-white px-8 py-6 flex justify-center items-center">
-            <h2 className="text-xl font-semibold text-center" style={{ ...customStyles.pressStart, fontSize: '16px' }}>Socials</h2>
-          </div>
-          <div className="p-6">
-            {/* DON PHONE Image */}
-            <div className="flex justify-center mb-2">
-              <div className={`relative ${isPhoneClicked ? 'animate-wiggle' : ''}`}>
-                <style jsx>{`
-                  @keyframes wiggle {
-                    0%, 100% { transform: rotate(0deg); }
-                    25% { transform: rotate(-3deg); }
-                    75% { transform: rotate(3deg); }
-                  }
-                  .animate-wiggle {
-                    animation: wiggle 0.3s ease-in-out;
-                  }
-                `}</style>
-                <Image 
-                  src="/DON PHONE V2.png"
-                  alt="Don with phone"
-                  width={400}
-                  height={400}
-                  className="cursor-pointer hover:opacity-90 transition-opacity"
-                  onClick={() => {
-                    setIsPhoneClicked(true);
-                    playBarkSound();
-                    setTimeout(() => {
-                      window.open('https://warpcast.com/~/channel/don/join?inviteCode=6KxiSbv0vSN2hk7F1LriCw', '_blank');
-                      setIsPhoneClicked(false);
-                    }, 800);
-                  }}
-                  unoptimized
-                />
-              </div>
-            </div>
-
-            {/* Description Text - Moved higher up with reduced margin */}
-            <div className="space-y-4">
-              <p className="text-center text-sm leading-relaxed" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                Click Don&apos;s Phone to Join our channel on warpcast, stay connected to the latest Don news and community updates. Don&apos;t forget to follow us on all socials!
-              </p>
-              
-              {/* Social Icons */}
-              <div className="flex justify-center gap-3 mt-4">
-                <Image 
-                  src="/icons8-twitter-bird-32.png"
-                  alt="Twitter Bird Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://twitter.com/dononbase', '_blank')}
-                  unoptimized
-                />
-                <Image 
-                  src="/icons8-telegram-app-32.png"
-                  alt="Telegram Logo"
-                  width={24}
-                  height={24}
-                  className="hover:opacity-80 transition-opacity cursor-pointer"
-                  onClick={() => window.open('https://t.me/donthedog', '_blank')}
                   unoptimized
                 />
               </div>
