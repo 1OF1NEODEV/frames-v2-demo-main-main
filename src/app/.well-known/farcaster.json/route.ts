@@ -12,7 +12,7 @@ export async function GET() {
     frame: {
       version: "1",
       name: "Don The Dog",
-      iconUrl: `${appUrl}/updated logo.png`,
+      iconUrl: `${appUrl}/logo_blue.png`,
       homeUrl: "https://donthedog.vercel.app/",
       imageUrl: `${appUrl}/frame-cast.png`,
       buttonTitle: "Launch Don App",
